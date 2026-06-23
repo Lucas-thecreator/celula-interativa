@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz da Célula • Célula Interativa</title>
+  <meta name="description" content="Quiz com uma pergunta de cada organela. Acerte todas e ganhe o selo de Cientista Celular.">
+  <meta name="theme-color" content="#2563EB">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="conteiner topo-inner">
+      <a href="index.html" class="logo"><span class="bolha" aria-hidden="true">🔬</span> Célula Interativa</a>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="index.html">Explorar</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="tutorial.html">Como montar</a>
+        <a href="qrcodes.html">QR Codes</a>
+        <a href="sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="a11y-bar"></div>
+
+  <main id="conteudo" class="conteiner">
+    <a class="voltar" href="index.html">← Voltar para o explorador</a>
+    <div id="quiz-app"><!-- montado por quiz.js --></div>
+  </main>
+
+  <footer class="rodape">
+    <div class="conteiner">
+      <p><a href="index.html">← Voltar ao explorador</a></p>
+    </div>
+  </footer>
+
+  <script src="data/organelas.js"></script>
+  <script src="js/a11y.js"></script>
+  <script src="js/comum.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>

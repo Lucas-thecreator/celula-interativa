@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import pypdf; print\\('ok'\\)\")",
+      "Bash(python -c \"import PyPDF2; print\\('ok2'\\)\")",
+      "Bash(pip list *)",
+      "PowerShell($cmds = @\\('py','python3','python'\\); foreach\\($c in $cmds\\){ $g = Get-Command $c -ErrorAction SilentlyContinue; if\\($g\\){ Write-Output \"$c -> $\\($g.Source\\)\" } }; Write-Output \"---pdftotext---\"; \\(Get-Command pdftotext -ErrorAction SilentlyContinue\\).Source)",
+      "Bash(node _serve.js)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(kill %1)",
+      "Bash(powershell -NoProfile -Command 'Get-NetTCPConnection -LocalPort 5173 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }')"
+    ]
+  }
+}

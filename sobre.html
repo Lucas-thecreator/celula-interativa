@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre o Projeto • Célula Interativa</title>
+  <meta name="description" content="O objetivo do projeto Célula Interativa e os recursos de acessibilidade que ele oferece.">
+  <meta name="theme-color" content="#2563EB">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="conteiner topo-inner">
+      <a href="index.html" class="logo"><span class="bolha" aria-hidden="true">🔬</span> Célula Interativa</a>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="index.html">Explorar</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="tutorial.html">Como montar</a>
+        <a href="qrcodes.html">QR Codes</a>
+        <a href="sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="a11y-bar"></div>
+
+  <main id="conteudo" class="conteiner">
+    <a class="voltar" href="index.html">← Voltar para o explorador</a>
+
+    <div class="hero">
+      <h1>Sobre o projeto</h1>
+      <p>
+        A <strong>Célula Interativa</strong> nasceu para complementar um protótipo físico de
+        célula em alto relevo, do tipo quebra-cabeça. Cada peça de organela tem um cartão com
+        QR Code; ao escanear, o aluno chega direto à página daquela organela, com imagem,
+        áudio e texto.
+      </p>
+    </div>
+
+    <section class="painel" aria-labelledby="objetivo-titulo">
+      <h2 id="objetivo-titulo">🎯 Objetivo</h2>
+      <p>
+        Ajudar estudantes do 6º ano a entender as organelas das células animal e vegetal de
+        um jeito concreto, usando uma analogia simples: a célula funciona como uma
+        <strong>escola</strong>. Assim, o conteúdo de ciências fica mais próximo do dia a dia.
+      </p>
+    </section>
+
+    <section class="painel" aria-labelledby="a11y-titulo">
+      <h2 id="a11y-titulo">♿ Acessibilidade em primeiro lugar</h2>
+      <p>O site foi construído para incluir todos os estudantes. Por isso ele tem:</p>
+      <ul class="lista-recursos">
+        <li><strong>Leitor de tela:</strong> textos, títulos em ordem e imagens descritas funcionam com TalkBack e VoiceOver.</li>
+        <li><strong>Áudio sob demanda:</strong> um botão grande lê a explicação em voz alta (para baixa visão, dislexia ou quem prefere ouvir) — sem atrapalhar o leitor de tela.</li>
+        <li><strong>Aumentar a fonte:</strong> botões A− / A+ para o texto crescer bastante.</li>
+        <li><strong>Alto contraste e modo escuro:</strong> para quem tem baixa visão ou sensibilidade à luz.</li>
+        <li><strong>Navegação por teclado:</strong> tudo funciona com Tab e Enter, com foco bem visível.</li>
+        <li><strong>Tátil:</strong> ligado ao protótipo físico em alto relevo, que pode ser tocado.</li>
+      </ul>
+      <p class="destaque">
+        💡 Princípio do projeto: se um recurso bonito atrapalhar o leitor de tela ou o
+        contraste, ele está errado. A inclusão vem antes de tudo.
+      </p>
+    </section>
+
+    <section class="painel" aria-labelledby="como-titulo">
+      <h2 id="como-titulo">🧭 Como usar</h2>
+      <ol class="passos-simples">
+        <li>No <a href="index.html">explorador</a>, escolha Célula Animal ou Vegetal.</li>
+        <li>Toque numa organela (no diagrama ou na lista) para abrir a página dela.</li>
+        <li>Ouça a explicação, leia a analogia e responda ao mini-quiz.</li>
+        <li>No fim, teste tudo no <a href="quiz.html">Quiz da Célula</a> e ganhe seu selo.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="conteiner">
+      <p>Projeto educativo • Célula Interativa — aprendizado acessível, interativo e inclusivo.</p>
+      <p><a href="index.html">Explorar</a> &nbsp;•&nbsp; <a href="tutorial.html">Como montar</a> &nbsp;•&nbsp; <a href="qrcodes.html">QR Codes</a></p>
+    </div>
+  </footer>
+
+  <script src="data/organelas.js"></script>
+  <script src="js/a11y.js"></script>
+  <script src="js/comum.js"></script>
+</body>
+</html>

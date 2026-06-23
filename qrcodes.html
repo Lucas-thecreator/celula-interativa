@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerar QR Codes • Célula Interativa</title>
+  <meta name="description" content="Gere e imprima os QR Codes de cada organela para colar nos cartões do protótipo.">
+  <meta name="theme-color" content="#2563EB">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="conteiner topo-inner">
+      <a href="index.html" class="logo"><span class="bolha" aria-hidden="true">🔬</span> Célula Interativa</a>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="index.html">Explorar</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="tutorial.html">Como montar</a>
+        <a href="qrcodes.html">QR Codes</a>
+        <a href="sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="a11y-bar"></div>
+
+  <main id="conteudo" class="conteiner">
+    <a class="voltar nao-imprimir" href="index.html">← Voltar para o explorador</a>
+
+    <div class="hero nao-imprimir">
+      <h1>🔗 Gerar QR Codes</h1>
+      <p>
+        Depois de publicar o site, cole abaixo o endereço (URL) onde ele ficou. O site gera
+        um QR Code para cada organela, para o quiz e para o tutorial. Clique em
+        <strong>Imprimir</strong> e cole cada QR Code no verso do cartão correspondente.
+      </p>
+      <div class="qr-config">
+        <div>
+          <label for="base">Endereço do site publicado</label>
+          <input id="base" type="url" placeholder="https://seu-site.netlify.app" inputmode="url" autocomplete="url">
+        </div>
+        <button class="btn-gerar" id="btn-gerar">Gerar QR Codes</button>
+        <button class="btn-gerar btn-gerar-azul" id="btn-imprimir">🖨 Imprimir</button>
+      </div>
+      <p class="dica-qr">
+        Dica: durante os testes no seu computador, você pode deixar em branco e clicar em
+        “Gerar” — os QR Codes vão apontar para os arquivos locais (úteis só nesta máquina).
+      </p>
+    </div>
+
+    <div id="erro-lib" class="erro nao-imprimir" hidden>
+      ⚠️ Não foi possível carregar o gerador de QR Codes (talvez você esteja sem internet).
+      Conecte-se à internet e recarregue a página.
+    </div>
+
+    <div class="grade-qr" id="grade-qr"></div>
+  </main>
+
+  <footer class="rodape nao-imprimir">
+    <div class="conteiner"><p><a href="index.html">← Voltar ao explorador</a></p></div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="data/organelas.js"></script>
+  <script src="js/a11y.js"></script>
+  <script src="js/comum.js"></script>
+  <script src="js/qrcodes.js"></script>
+</body>
+</html>

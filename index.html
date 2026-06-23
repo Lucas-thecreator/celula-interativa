@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Célula Interativa • Aprenda tocando, vendo e ouvindo</title>
+  <meta name="description" content="Site interativo e acessível sobre as organelas das células animal e vegetal, complemento do protótipo de célula em alto relevo.">
+  <meta name="theme-color" content="#2563EB">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="conteiner topo-inner">
+      <a href="index.html" class="logo"><span class="bolha" aria-hidden="true">🔬</span> Célula Interativa</a>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="index.html">Explorar</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="tutorial.html">Como montar</a>
+        <a href="qrcodes.html">QR Codes</a>
+        <a href="sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="a11y-bar"></div>
+
+  <main id="conteudo" class="conteiner">
+    <section class="hero">
+      <h1>Explore a célula tocando, vendo e ouvindo</h1>
+      <p>
+        Este site é o complemento do nosso <strong>protótipo de célula em alto relevo</strong>.
+        Escaneie o QR Code de cada organela, ou escolha abaixo, para ver a imagem, ouvir a
+        explicação em áudio e ler o texto de apoio. Feito para todos — inclusive estudantes
+        com deficiência visual ou baixa visão.
+      </p>
+
+      <div class="seletor-celula" role="group" aria-label="Escolha o tipo de célula">
+        <button class="card-celula animal" data-tipo="animal" aria-pressed="true">
+          <span class="emoji" aria-hidden="true">🐾</span>
+          <span>Célula Animal<small>Membrana, núcleo, mitocôndria e mais</small></span>
+        </button>
+        <button class="card-celula vegetal" data-tipo="vegetal" aria-pressed="false">
+          <span class="emoji" aria-hidden="true">🌿</span>
+          <span>Célula Vegetal<small>Inclui vacúolo, cloroplasto e parede celular</small></span>
+        </button>
+      </div>
+    </section>
+
+    <div class="titulo-secao" id="titulo-secao"></div>
+
+    <section aria-label="Diagrama da célula">
+      <p class="dica-diagrama">🔎 Toque em uma organela no diagrama para abrir a página dela.
+        Prefere uma lista? Ela está logo abaixo do diagrama.</p>
+      <div class="diagrama" id="diagrama"></div>
+    </section>
+
+    <section aria-labelledby="lista-titulo">
+      <h2 id="lista-titulo" class="subtitulo">Lista das organelas</h2>
+      <div class="grade" id="lista-organelas"></div>
+    </section>
+
+    <p class="cta-tutorial">
+      👩‍🏫 É professor(a) ou quer montar o protótipo?
+      <a href="tutorial.html"><strong>Veja o passo a passo de como montar →</strong></a>
+    </p>
+  </main>
+
+  <footer class="rodape">
+    <div class="conteiner">
+      <p>Projeto educativo • Célula Interativa — aprendizado acessível, interativo e inclusivo.</p>
+      <p><a href="sobre.html">Sobre o projeto</a> &nbsp;•&nbsp; <a href="tutorial.html">Como montar</a> &nbsp;•&nbsp; <a href="qrcodes.html">Gerar QR Codes</a></p>
+    </div>
+  </footer>
+
+  <script src="data/organelas.js"></script>
+  <script src="js/a11y.js"></script>
+  <script src="js/comum.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

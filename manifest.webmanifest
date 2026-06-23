@@ -1,0 +1,22 @@
+{
+  "name": "Célula Interativa",
+  "short_name": "Célula",
+  "description": "Explorador acessível das organelas das células animal e vegetal, complemento do protótipo em alto relevo.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#EAF1FF",
+  "theme_color": "#2563EB",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

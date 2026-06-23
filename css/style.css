@@ -1,0 +1,528 @@
+/* =========================================================================
+   TEMA VISUAL E ACESSIBILIDADE
+   Cores e fontes seguem o que foi definido no projeto.
+   ========================================================================= */
+
+:root {
+  --azul: #2563EB;
+  --azul-escuro: #1E3A8A;
+  --azul-claro: #EAF1FF;   /* fundo */
+  --laranja: #F97316;
+  --laranja-escuro: #C2410C; /* laranja com contraste suficiente p/ texto */
+  --branco: #FFFFFF;
+  --texto: #1F2937;
+  --cinza: #6B7280;
+
+  --raio: 18px;            /* cantos arredondados */
+  --sombra: 0 8px 24px rgba(37, 99, 235, 0.12);
+  --font-scale: 1;         /* alterado pelos botões A- / A+ */
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: calc(18px * var(--font-scale)); }
+
+body {
+  margin: 0;
+  font-family: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--texto);
+  background: var(--azul-claro);
+  line-height: 1.6;
+}
+
+h1, h2, h3, .titulo {
+  font-family: 'Poppins', 'Nunito', system-ui, sans-serif;
+  line-height: 1.2;
+  color: var(--azul-escuro);
+}
+
+a { color: var(--azul); }
+
+/* Foco bem visível (acessibilidade / navegação por teclado) */
+:focus-visible {
+  outline: 4px solid var(--laranja);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Pular para o conteúdo (leitor de tela / teclado) */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--azul-escuro);
+  color: #fff;
+  padding: 12px 18px;
+  z-index: 100;
+  border-radius: 0 0 var(--raio) 0;
+}
+.skip-link:focus { left: 0; }
+
+/* ---------- Cabeçalho ---------- */
+.topo {
+  background: linear-gradient(135deg, var(--azul) 0%, var(--azul-escuro) 100%);
+  color: #fff;
+  padding: 18px 20px;
+}
+.topo .conteiner { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.topo a.logo { color: #fff; text-decoration: none; font-weight: 800; font-size: 1.25rem;
+  font-family: 'Poppins', sans-serif; display: flex; align-items: center; gap: 10px; }
+.topo .logo .bolha { font-size: 1.6rem; }
+
+.conteiner { max-width: 1000px; margin: 0 auto; padding: 0 18px; }
+
+/* ---------- Barra de acessibilidade ---------- */
+#a11y-bar {
+  background: var(--branco);
+  border-bottom: 2px solid #dbe6ff;
+}
+#a11y-bar .conteiner {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding-top: 8px; padding-bottom: 8px;
+}
+#a11y-bar .rotulo { font-weight: 700; color: var(--azul-escuro); margin-right: 4px; }
+.btn-a11y {
+  border: 2px solid var(--azul);
+  background: #fff;
+  color: var(--azul-escuro);
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+.btn-a11y:hover { background: var(--azul-claro); }
+.btn-a11y[aria-pressed="true"] { background: var(--azul); color: #fff; }
+
+/* ---------- Página inicial ---------- */
+main { padding: 26px 0 60px; }
+
+.hero {
+  background: var(--branco);
+  border-radius: var(--raio);
+  padding: 28px;
+  box-shadow: var(--sombra);
+  margin-bottom: 26px;
+}
+.hero h1 { margin: 0 0 8px; font-size: 2rem; }
+.hero p { margin: 0; max-width: 70ch; }
+
+.seletor-celula { display: flex; gap: 16px; flex-wrap: wrap; margin: 22px 0 6px; }
+.card-celula {
+  flex: 1 1 240px;
+  border: none;
+  border-radius: var(--raio);
+  padding: 22px;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: var(--sombra);
+  display: flex; align-items: center; gap: 14px;
+}
+.card-celula .emoji { font-size: 2.2rem; }
+.card-celula.animal  { background: linear-gradient(135deg, var(--azul) 0%, var(--azul-escuro) 100%); }
+.card-celula.vegetal { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); }
+.card-celula small { display: block; font-weight: 600; font-size: 0.85rem; opacity: 0.9; }
+.card-celula[aria-pressed="true"] { outline: 5px solid var(--laranja); }
+
+/* ---------- Grade de organelas ---------- */
+.titulo-secao { display: flex; align-items: baseline; gap: 12px; margin: 30px 0 4px; }
+.titulo-secao h2 { margin: 0; font-size: 1.5rem; }
+.titulo-secao .tag {
+  background: var(--laranja); color: #fff; font-weight: 800;
+  border-radius: 999px; padding: 2px 12px; font-size: 0.8rem;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+.card-organela {
+  display: block;
+  background: var(--branco);
+  border-radius: var(--raio);
+  padding: 16px;
+  text-decoration: none;
+  color: var(--texto);
+  box-shadow: var(--sombra);
+  border: 3px solid transparent;
+  transition: transform .12s ease, border-color .12s ease;
+}
+.card-organela:hover, .card-organela:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--laranja);
+}
+.card-organela .mini-img {
+  width: 100%; height: 130px; border-radius: 12px; object-fit: cover;
+  background: var(--azul-claro); margin-bottom: 12px; display: block;
+}
+.card-organela h3 { margin: 0 0 4px; font-size: 1.15rem; color: var(--azul-escuro); }
+.card-organela p { margin: 0; color: var(--cinza); font-size: 0.95rem; }
+
+/* Placeholder usado quando ainda não há foto */
+.placeholder-img {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  background: repeating-linear-gradient(45deg, #eef4ff, #eef4ff 12px, #e3edff 12px, #e3edff 24px);
+  color: var(--azul); font-weight: 800; font-family: 'Poppins', sans-serif;
+  padding: 10px;
+}
+
+/* ---------- Página da organela ---------- */
+.voltar {
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; font-weight: 800; color: var(--azul-escuro);
+  margin-bottom: 14px;
+}
+.organela-topo h1 { font-size: 2rem; margin: 0 0 4px; }
+.organela-tags { margin-bottom: 18px; }
+.pill {
+  display: inline-block; background: var(--azul-claro); color: var(--azul-escuro);
+  border-radius: 999px; padding: 3px 12px; font-weight: 700; font-size: 0.85rem; margin-right: 6px;
+}
+
+.painel {
+  background: var(--branco); border-radius: var(--raio);
+  padding: 22px; box-shadow: var(--sombra); margin-bottom: 22px;
+}
+
+/* Visualizador da imagem (com leve efeito 3D ao passar o mouse / tocar) */
+.visu {
+  perspective: 1000px;
+  display: flex; justify-content: center;
+  margin-bottom: 4px;
+}
+.visu-img {
+  max-width: 100%; max-height: 360px; border-radius: 16px;
+  box-shadow: var(--sombra);
+  transition: transform .15s ease;
+  will-change: transform;
+}
+.visu-placeholder {
+  width: 100%; max-width: 420px; height: 280px; border-radius: 16px;
+}
+.visu-legenda { text-align: center; color: var(--cinza); font-size: 0.9rem; margin-top: 10px; }
+
+/* ---------- Player de áudio ---------- */
+.player {
+  background: linear-gradient(135deg, var(--azul) 0%, var(--azul-escuro) 100%);
+  color: #fff;
+  border-radius: var(--raio);
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--sombra);
+  margin-bottom: 22px;
+}
+.player .botoes { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 6px; }
+.btn-play {
+  border: none; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 800;
+  border-radius: 999px; padding: 16px 30px; font-size: 1.25rem;
+  background: var(--laranja); color: #fff; box-shadow: 0 6px 16px rgba(0,0,0,.2);
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-play:hover { background: #ea6a0a; }
+.btn-sec {
+  border: 2px solid #fff; background: transparent; color: #fff; cursor: pointer;
+  font-family: 'Poppins', sans-serif; font-weight: 700; border-radius: 999px;
+  padding: 12px 22px; font-size: 1rem;
+}
+.btn-sec:hover { background: rgba(255,255,255,.15); }
+.player .estado { margin-top: 10px; font-weight: 700; min-height: 1.2em; }
+.player .aviso { font-size: 0.85rem; opacity: .9; margin-top: 8px; }
+
+/* Texto de apoio */
+.texto-apoio { font-size: 1.15rem; }
+.texto-apoio h2 { margin-top: 0; }
+.destaque {
+  background: #FFF3E6;
+  border-left: 6px solid var(--laranja);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 18px 0 0;
+  font-weight: 700;
+  color: var(--laranja-escuro);
+}
+html.hc .destaque { background: #000; border-left-color: #ffec3d; color: #ffec3d; border: 2px solid #ffec3d; }
+
+/* ---------- Tutorial ---------- */
+.passo {
+  background: var(--branco); border-radius: var(--raio); box-shadow: var(--sombra);
+  padding: 20px 22px; margin-bottom: 18px; display: flex; gap: 18px; align-items: flex-start;
+}
+.passo .num {
+  flex: 0 0 auto; width: 46px; height: 46px; border-radius: 50%;
+  background: var(--laranja); color: #fff; font-family: 'Poppins', sans-serif; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+}
+.passo h3 { margin: 0 0 6px; }
+.passo .foto-passo {
+  width: 100%; max-width: 360px; height: 200px; border-radius: 12px; object-fit: cover; margin-top: 10px;
+}
+.lista-materiais { columns: 2; gap: 24px; }
+@media (max-width: 560px) { .lista-materiais { columns: 1; } .passo { flex-direction: column; } }
+
+/* ---------- Rodapé ---------- */
+.rodape {
+  background: var(--azul-escuro); color: #cdddff; padding: 24px 0; margin-top: 40px;
+  font-size: 0.9rem;
+}
+.rodape a { color: #fff; }
+
+/* =========================================================================
+   MODO ALTO CONTRASTE
+   ========================================================================= */
+html.hc, html.hc body { background: #000; color: #fff; }
+html.hc h1, html.hc h2, html.hc h3, html.hc .titulo,
+html.hc .card-organela h3, html.hc .card-organela p { color: #ffec3d; }
+html.hc .hero, html.hc .painel, html.hc .card-organela, html.hc .passo,
+html.hc #a11y-bar, html.hc .player, html.hc .card-celula {
+  background: #000 !important; border: 2px solid #ffec3d; color: #fff;
+}
+html.hc a, html.hc .voltar { color: #ffec3d; }
+html.hc #a11y-bar .rotulo { color: #ffec3d; }
+html.hc .btn-a11y { background: #000; color: #ffec3d; border-color: #ffec3d; }
+html.hc .btn-a11y[aria-pressed="true"] { background: #ffec3d; color: #000; }
+html.hc .btn-play { background: #ffec3d; color: #000; }
+html.hc .btn-sec { border-color: #ffec3d; color: #ffec3d; }
+html.hc .pill, html.hc .tag, html.hc .num { background: #ffec3d; color: #000; }
+html.hc .topo { background: #000; border-bottom: 2px solid #ffec3d; }
+html.hc :focus-visible { outline-color: #fff; }
+
+/* Respeita quem prefere menos animação */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* =========================================================================
+   MENU DE NAVEGAÇÃO
+   ========================================================================= */
+.topo-inner { justify-content: space-between; }
+.menu { display: flex; flex-wrap: wrap; gap: 4px; }
+.menu a {
+  color: #fff; text-decoration: none; font-weight: 700;
+  padding: 6px 12px; border-radius: 999px; font-size: 0.98rem;
+}
+.menu a:hover { background: rgba(255, 255, 255, 0.18); }
+.menu a[aria-current="page"] { background: var(--laranja); color: #fff; }
+
+/* =========================================================================
+   HOME: títulos auxiliares e diagrama
+   ========================================================================= */
+.subtitulo { font-size: 1.4rem; margin: 26px 0 10px; }
+.dica-diagrama, .dica-qr { color: var(--cinza); font-size: 0.95rem; }
+.cta-tutorial { margin-top: 34px; font-size: 1.1rem; }
+
+.diagrama {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: 6px auto 12px;
+  aspect-ratio: 4 / 3;
+}
+.celula-forma {
+  position: absolute; inset: 0;
+  border: 6px solid var(--azul);
+  border-radius: 50% 50% 48% 52% / 52% 50% 50% 48%;
+  background: radial-gradient(circle at 50% 42%, #f3f8ff 0%, #dee9ff 72%, #cddffb 100%);
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.diagrama.vegetal .celula-forma {
+  border: 7px solid #15803d;
+  border-radius: 22px;
+  background: linear-gradient(160deg, #ecfdf3 0%, #cdeed8 100%);
+  box-shadow: inset 0 0 0 9px rgba(22, 163, 74, 0.16);
+}
+.rotulo-forma {
+  margin-bottom: 6px; font-size: 0.72rem; font-weight: 800;
+  color: var(--azul-escuro); background: rgba(255, 255, 255, 0.7);
+  padding: 1px 8px; border-radius: 999px;
+}
+.diagrama.vegetal .rotulo-forma { color: #14532d; }
+
+.hotspot {
+  position: absolute; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  text-decoration: none; z-index: 2;
+}
+.ponto {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: #fff; border: 3px solid var(--cor, #2563EB);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.35rem; box-shadow: var(--sombra);
+  transition: transform 0.12s ease;
+}
+.ponto-rotulo {
+  background: rgba(255, 255, 255, 0.94); color: var(--azul-escuro);
+  font-weight: 800; font-size: 0.72rem; line-height: 1.2;
+  padding: 2px 8px; border-radius: 999px; white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14); max-width: 30vw; overflow: hidden; text-overflow: ellipsis;
+}
+.hotspot:hover .ponto, .hotspot:focus-visible .ponto { transform: scale(1.14); }
+.hotspot:focus-visible { outline: none; }
+.hotspot:focus-visible .ponto { outline: 4px solid var(--laranja); outline-offset: 3px; }
+
+@media (max-width: 560px) {
+  .ponto-rotulo { display: none; }      /* no celular, o rótulo fica na lista abaixo */
+  .ponto { width: 40px; height: 40px; font-size: 1.15rem; }
+}
+
+/* Emoji no lugar da foto (placeholder) nos cartões */
+.mini-emoji { font-size: 2.4rem; }
+.card-organela h3 .apelido { display: block; font-weight: 700; color: var(--cinza); font-size: 0.8rem; }
+
+/* =========================================================================
+   PÁGINA DA ORGANELA: extras
+   ========================================================================= */
+.apelido-grande { margin: 0 0 10px; color: var(--laranja-escuro); font-weight: 800; font-size: 1.1rem; }
+.player-titulo { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.1rem; margin: 0 0 6px; }
+.visu-placeholder { display: flex; flex-direction: column; gap: 8px; }
+.placeholder-img .ph-emoji, .placeholder-img.visu-placeholder .ph-emoji { font-size: 3rem; }
+
+.nav-organelas { display: flex; gap: 12px; justify-content: space-between; margin: 6px 0 10px; }
+.btn-nav {
+  flex: 1 1 0; background: var(--branco); border: 2px solid var(--azul);
+  border-radius: var(--raio); padding: 14px 16px; text-decoration: none;
+  color: var(--azul-escuro); font-weight: 800; display: flex; align-items: center; gap: 10px;
+  box-shadow: var(--sombra);
+}
+.btn-nav.prox { justify-content: flex-end; text-align: right; }
+.btn-nav small { display: block; font-weight: 700; color: var(--cinza); font-size: 0.75rem; }
+.btn-nav:hover, .btn-nav:focus-visible { border-color: var(--laranja); transform: translateY(-2px); }
+
+/* =========================================================================
+   QUIZ (mini-quiz na organela e quiz final)
+   ========================================================================= */
+.mini-quiz h2 { margin-top: 0; }
+.quiz-pergunta { font-size: 1.2rem; font-weight: 800; color: var(--azul-escuro); }
+.quiz-opcoes { display: grid; gap: 10px; margin: 14px 0; }
+.quiz-opcao {
+  text-align: left; font-family: inherit; font-size: 1.05rem; font-weight: 700;
+  background: #fff; border: 2px solid var(--azul); color: var(--texto);
+  border-radius: 12px; padding: 14px 16px; cursor: pointer;
+}
+.quiz-opcao:hover:not(:disabled) { background: var(--azul-claro); }
+.quiz-opcao:disabled { cursor: default; opacity: 1; }
+.quiz-opcao.certa { background: #DCFCE7; border-color: #16A34A; color: #14532D; }
+.quiz-opcao.certa::after { content: '  ✓ certa'; font-weight: 800; }
+.quiz-opcao.errada { background: #FEE2E2; border-color: #DC2626; color: #7F1D1D; }
+.quiz-opcao.errada::after { content: ' — sua escolha'; font-weight: 800; }
+.quiz-feedback { font-weight: 800; min-height: 1.3em; margin: 6px 0 0; }
+.quiz-feedback.ok { color: #15803D; }
+.quiz-feedback.nao { color: #B91C1C; }
+
+.quiz-card { max-width: 720px; margin: 0 auto; }
+.quiz-progresso { display: flex; justify-content: space-between; font-weight: 800; color: var(--azul-escuro); }
+.quiz-acertos { color: var(--laranja-escuro); }
+.quiz-barra { height: 10px; background: #dbe6ff; border-radius: 999px; overflow: hidden; margin: 8px 0 18px; }
+.quiz-barra span { display: block; height: 100%; background: var(--laranja); transition: width 0.25s ease; }
+
+.btn-grande {
+  border: none; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 800;
+  border-radius: 999px; padding: 14px 28px; font-size: 1.15rem;
+  background: var(--laranja); color: #fff; box-shadow: var(--sombra); margin-top: 6px;
+}
+.btn-grande:hover { background: #ea6a0a; }
+.btn-sec-claro {
+  display: inline-block; border: 2px solid var(--azul); color: var(--azul-escuro);
+  background: #fff; border-radius: 999px; padding: 12px 24px; font-weight: 800; text-decoration: none;
+}
+.quiz-final { text-align: center; }
+.quiz-resultado-emoji { font-size: 3.4rem; }
+.quiz-final-botoes { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+.quiz-selo-mini { background: #FFF3E6; border-radius: 12px; padding: 10px 14px; font-weight: 700; color: var(--laranja-escuro); }
+
+.selo {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 4px;
+  background: radial-gradient(circle at 50% 35%, #fff7e6, #ffe3b3);
+  border: 4px solid var(--laranja); border-radius: 20px; padding: 18px 30px; margin: 16px auto;
+  color: var(--laranja-escuro); font-family: 'Poppins', sans-serif;
+}
+.selo strong { font-size: 1.3rem; }
+.selo small { color: var(--texto); font-weight: 700; }
+.selo-emoji { font-size: 3rem; }
+
+/* =========================================================================
+   TUTORIAL: passos numerados (lista ordenada de verdade) + listas
+   ========================================================================= */
+.passos { list-style: none; counter-reset: passo; padding: 0; margin: 0; }
+.passos > li.passo {
+  position: relative; counter-increment: passo;
+  background: var(--branco); border-radius: var(--raio); box-shadow: var(--sombra);
+  padding: 20px 22px 20px 78px; margin-bottom: 16px;
+}
+.passos > li.passo::before {
+  content: counter(passo); position: absolute; left: 18px; top: 20px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--laranja); color: #fff; font-family: 'Poppins', sans-serif; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+}
+.passos > li.passo h3 { margin: 0 0 6px; }
+.bloco-premium { margin-top: 4px; }
+.bloco-premium.travado { filter: blur(5px); pointer-events: none; user-select: none; }
+.lista-recursos { padding-left: 1.1em; }
+.lista-recursos li { margin-bottom: 8px; }
+.passos-simples { padding-left: 1.2em; }
+.passos-simples li { margin-bottom: 6px; }
+@media (max-width: 560px) {
+  .passos > li.passo { padding: 64px 18px 18px; }
+  .passos > li.passo::before { top: 14px; }
+  .nav-organelas { flex-direction: column; }
+  .menu a { padding: 6px 9px; font-size: 0.9rem; }
+}
+
+/* =========================================================================
+   GERADOR DE QR CODES
+   ========================================================================= */
+.qr-config { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; margin-top: 8px; }
+.qr-config label { font-weight: 800; color: var(--azul-escuro); display: block; margin-bottom: 6px; }
+.qr-config input {
+  font-family: inherit; font-size: 1rem; padding: 12px 14px; border: 2px solid var(--azul);
+  border-radius: 12px; min-width: 300px; max-width: 100%;
+}
+.btn-gerar {
+  background: var(--laranja); color: #fff; border: none; font-family: 'Poppins', sans-serif;
+  font-weight: 800; font-size: 1.05rem; padding: 13px 24px; border-radius: 999px; cursor: pointer;
+}
+.btn-gerar-azul { background: var(--azul); }
+.grade-qr { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 24px; }
+.cartao-qr {
+  background: #fff; border: 2px solid #dbe6ff; border-radius: 14px; padding: 16px; text-align: center;
+  break-inside: avoid;
+}
+.cartao-qr h3 { margin: 0 0 10px; font-size: 1.05rem; }
+.cartao-qr .qr-box { display: flex; justify-content: center; }
+.cartao-qr .url { font-size: 0.72rem; color: var(--cinza); word-break: break-all; margin-top: 10px; }
+.erro { background: #fff3cd; border: 2px solid #f0c000; padding: 14px; border-radius: 12px; margin-top: 16px; color: #5b4a00; }
+
+@media print {
+  .topo, #a11y-bar, .rodape, .nao-imprimir, .skip-link { display: none !important; }
+  body { background: #fff; }
+  .cartao-qr { border: 1px dashed #999; }
+}
+
+/* =========================================================================
+   MODO ESCURO (opcional, separado do alto contraste)
+   ========================================================================= */
+html.escuro, html.escuro body { background: #0b1220; color: #e6eeff; }
+html.escuro h1, html.escuro h2, html.escuro h3, html.escuro .titulo,
+html.escuro .card-organela h3, html.escuro .subtitulo { color: #9ec1ff; }
+html.escuro .hero, html.escuro .painel, html.escuro .card-organela,
+html.escuro .passos > li.passo, html.escuro .cartao-qr, html.escuro .btn-nav {
+  background: #16213a; border-color: #2a3a5e; color: #e6eeff;
+}
+html.escuro #a11y-bar { background: #0f1830; border-bottom-color: #2a3a5e; }
+html.escuro #a11y-bar .rotulo { color: #9ec1ff; }
+html.escuro .btn-a11y { background: #16213a; color: #cfe0ff; border-color: #3b5180; }
+html.escuro .card-organela p, html.escuro .visu-legenda, html.escuro .dica-diagrama,
+html.escuro .dica-qr, html.escuro .btn-nav small { color: #aab8d6; }
+html.escuro .quiz-opcao { background: #16213a; color: #e6eeff; border-color: #3b5180; }
+html.escuro .quiz-opcao.certa { background: #14532d; color: #d9ffe6; border-color: #22c55e; }
+html.escuro .quiz-opcao.errada { background: #4c1d1d; color: #ffd9d9; border-color: #ef4444; }
+html.escuro .placeholder-img { background: #1c2842; color: #9ec1ff; }
+html.escuro a { color: #9ec1ff; }
+html.escuro .celula-forma { background: #16213a; }
