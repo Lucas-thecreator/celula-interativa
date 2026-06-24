@@ -1,18 +1,17 @@
 /* =========================================================================
    SERVICE WORKER  (sw.js)  — funcionamento offline / instalável (PWA)
    -------------------------------------------------------------------------
-   Estratégia:
-   - Na instalação, guarda os arquivos principais do site (app shell).
-   - Páginas (navegação): tenta a rede primeiro e cai para o cache se offline
-     — assim o conteúdo atualiza quando há internet.
-   - Demais arquivos (css, js, imagens, fontes): usa o cache primeiro e busca
-     na rede só se não tiver — rápido e funciona offline.
+   Estratégia escolhida para EVITAR "site desatualizado":
+   - Arquivos do próprio site (páginas, css, js, dados): REDE primeiro. Assim,
+     com internet, o aluno SEMPRE vê a versão mais nova; o cache é só reserva
+     para quando estiver offline.
+   - Recursos externos (Google Fonts, lib de QR): cache primeiro (mudam pouco).
 
-   Ao publicar uma nova versão do site, aumente o número em CACHE para forçar
-   a atualização nos aparelhos.
+   Ao publicar uma nova versão do site, aumente o número em CACHE (v2 -> v3...)
+   para garantir a limpeza do cache antigo nos aparelhos.
    ========================================================================= */
 
-var CACHE = 'celula-interativa-v1';
+var CACHE = 'celula-interativa-v2';
 
 var CORE = [
   'index.html',
@@ -21,6 +20,7 @@ var CORE = [
   'qrcodes.html',
   'tutorial.html',
   'sobre.html',
+  '404.html',
   'css/style.css',
   'data/organelas.js',
   'js/a11y.js',
@@ -56,29 +56,34 @@ self.addEventListener('fetch', function (e) {
   var req = e.request;
   if (req.method !== 'GET') return;
 
-  // Páginas: rede primeiro, cache como reserva (ignora a query ?id=...).
-  if (req.mode === 'navigate') {
+  var url;
+  try { url = new URL(req.url); } catch (err) { return; }
+  var mesmaOrigem = (url.origin === self.location.origin);
+
+  // Páginas e arquivos do próprio site: REDE primeiro, cache como reserva.
+  if (req.mode === 'navigate' || mesmaOrigem) {
     e.respondWith(
       fetch(req).then(function (resp) {
-        var copia = resp.clone();
-        caches.open(CACHE).then(function (c) { c.put(req, copia); });
+        if (resp && resp.status === 200) {
+          var copia = resp.clone();
+          caches.open(CACHE).then(function (c) { c.put(req, copia); });
+        }
         return resp;
       }).catch(function () {
         return caches.match(req, { ignoreSearch: true }).then(function (r) {
-          return r || caches.match('index.html');
+          if (r) return r;
+          return (req.mode === 'navigate') ? caches.match('index.html') : Response.error();
         });
       })
     );
     return;
   }
 
-  // Outros arquivos: cache primeiro, depois rede (guardando para a próxima).
+  // Recursos externos (fontes, lib de QR): cache primeiro.
   e.respondWith(
     caches.match(req).then(function (cacheado) {
-      if (cacheado) return cacheado;
-      return fetch(req).then(function (resp) {
-        if (resp && resp.status === 200 &&
-            (resp.type === 'basic' || resp.type === 'cors')) {
+      return cacheado || fetch(req).then(function (resp) {
+        if (resp && resp.status === 200 && (resp.type === 'basic' || resp.type === 'cors')) {
           var copia = resp.clone();
           caches.open(CACHE).then(function (c) { c.put(req, copia); });
         }

@@ -6,6 +6,16 @@
   <title>Célula Interativa • Aprenda tocando, vendo e ouvindo</title>
   <meta name="description" content="Site interativo e acessível sobre as organelas das células animal e vegetal, complemento do protótipo de célula em alto relevo.">
   <meta name="theme-color" content="#2563EB">
+  <script>
+    /* Aplica a acessibilidade salva ANTES de a página aparecer (evita piscar). */
+    try {
+      var _p = JSON.parse(localStorage.getItem('celulas_a11y')) || {};
+      var _d = document.documentElement;
+      if (_p.fonte) _d.style.setProperty('--font-scale', _p.fonte);
+      if (_p.contraste) _d.classList.add('hc');
+      if (_p.escuro) _d.classList.add('escuro');
+    } catch (e) {}
+  </script>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/icon.svg">

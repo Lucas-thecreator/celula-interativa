@@ -11,6 +11,8 @@
 
 (function () {
   var BASE_KEY = 'celulas_qr_base';
+  // URL padrão do site publicado (troque aqui se você mudar de endereço).
+  var URL_PADRAO = 'https://lucas-thecreator.github.io/celula-interativa/';
   var campoBase = document.getElementById('base');
   var grade = document.getElementById('grade-qr');
   var erroLib = document.getElementById('erro-lib');
@@ -64,8 +66,8 @@
 
   try {
     var salvo = localStorage.getItem(BASE_KEY);
-    if (salvo && campoBase) campoBase.value = salvo;
-  } catch (e) {}
+    if (campoBase) campoBase.value = (salvo !== null && salvo !== '') ? salvo : URL_PADRAO;
+  } catch (e) { if (campoBase && !campoBase.value) campoBase.value = URL_PADRAO; }
 
   window.addEventListener('load', gerar);
 })();

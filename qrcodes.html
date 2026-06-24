@@ -6,6 +6,16 @@
   <title>Gerar QR Codes • Célula Interativa</title>
   <meta name="description" content="Gere e imprima os QR Codes de cada organela para colar nos cartões do protótipo.">
   <meta name="theme-color" content="#2563EB">
+  <script>
+    /* Aplica a acessibilidade salva ANTES de a página aparecer (evita piscar). */
+    try {
+      var _p = JSON.parse(localStorage.getItem('celulas_a11y')) || {};
+      var _d = document.documentElement;
+      if (_p.fonte) _d.style.setProperty('--font-scale', _p.fonte);
+      if (_p.contraste) _d.classList.add('hc');
+      if (_p.escuro) _d.classList.add('escuro');
+    } catch (e) {}
+  </script>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,7 +54,7 @@
       <div class="qr-config">
         <div>
           <label for="base">Endereço do site publicado</label>
-          <input id="base" type="url" placeholder="https://seu-site.netlify.app" inputmode="url" autocomplete="url">
+          <input id="base" type="url" placeholder="https://lucas-thecreator.github.io/celula-interativa/" inputmode="url" autocomplete="url">
         </div>
         <button class="btn-gerar" id="btn-gerar">Gerar QR Codes</button>
         <button class="btn-gerar btn-gerar-azul" id="btn-imprimir">🖨 Imprimir</button>

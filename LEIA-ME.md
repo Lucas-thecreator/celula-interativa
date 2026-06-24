@@ -73,14 +73,25 @@ uma **gravação própria**: coloque o MP3 em `audio/` e preencha o campo `audio
 > ⚠️ Celulares bloqueiam áudio automático. Por isso o áudio só toca quando o aluno aperta o
 > botão grande **“▶ Ouvir explicação”** — e nunca por cima do leitor de tela.
 
-## 🌐 4. Como PUBLICAR (recomendado: Netlify Drop — grátis)
+## 🌐 4. Como PUBLICAR e ATUALIZAR
 
-1. Acesse **https://app.netlify.com/drop**.
-2. Arraste a pasta inteira `Células` para a área indicada.
-3. Em segundos ele gera um endereço, ex.: `https://celula-interativa.netlify.app`.
-4. (Opcional) Crie uma conta grátis para renomear o site e mantê-lo no ar.
+Este projeto está publicado no **GitHub Pages**:
+`https://lucas-thecreator.github.io/celula-interativa/`
 
-**Alternativa — GitHub Pages:** suba os arquivos e ative *Settings → Pages*.
+**Para atualizar o site depois de mexer em algum arquivo:**
+```bash
+git add -A
+git commit -m "descreva a mudança"
+git push
+```
+Em ~1 minuto o GitHub Pages atualiza sozinho.
+
+> ⚠️ Sempre que mudar **css/js**, aumente o número em `CACHE` dentro de `sw.js`
+> (ex.: `celula-interativa-v2` → `v3`). Isso garante que os celulares peguem a versão nova
+> e não fiquem com o site "desatualizado" no cache offline.
+
+**Alternativa sem git — Netlify Drop:** acesse **https://app.netlify.com/drop** e arraste a
+pasta inteira. Ele gera um endereço na hora (crie uma conta grátis para mantê-lo no ar).
 
 > O modo offline (PWA) e a instalação no celular só funcionam no site **publicado** (https),
 > não abrindo o arquivo direto no computador.
