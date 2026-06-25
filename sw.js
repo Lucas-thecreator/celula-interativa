@@ -11,24 +11,28 @@
    para garantir a limpeza do cache antigo nos aparelhos.
    ========================================================================= */
 
-var CACHE = 'celula-interativa-v2';
+var CACHE = 'celula-interativa-v3';
 
 var CORE = [
   'index.html',
   'organela.html',
   'quiz.html',
+  'comparar.html',
   'qrcodes.html',
   'tutorial.html',
   'sobre.html',
   '404.html',
   'css/style.css',
   'data/organelas.js',
+  'js/icones.js',
+  'js/progresso.js',
   'js/a11y.js',
   'js/comum.js',
   'js/tts.js',
   'js/main.js',
   'js/organela.js',
   'js/quiz.js',
+  'js/comparar.js',
   'js/qrcodes.js',
   'manifest.webmanifest',
   'assets/icon.svg'

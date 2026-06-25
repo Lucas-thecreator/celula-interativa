@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz da Célula • Célula Interativa</title>
-  <meta name="description" content="Quiz com uma pergunta de cada organela. Acerte todas e ganhe o selo de Cientista Celular.">
+  <title>Animal × Vegetal • Célula Interativa</title>
+  <meta name="description" content="Compare a célula animal e a célula vegetal: o que as duas têm em comum e o que é exclusivo de cada uma.">
   <meta name="theme-color" content="#2563EB">
   <script>
     /* Aplica a acessibilidade salva ANTES de a página aparecer (evita piscar). */
@@ -45,20 +45,34 @@
 
   <main id="conteudo" class="conteiner">
     <a class="voltar" href="index.html">← Voltar para o explorador</a>
-    <div id="quiz-app"><!-- montado por quiz.js --></div>
+
+    <div class="hero">
+      <h1>🐾 Animal × Vegetal 🌿</h1>
+      <p>
+        As células <strong>animal</strong> e <strong>vegetal</strong> têm muita coisa parecida,
+        mas algumas organelas só aparecem em uma delas. Veja abaixo o que as duas têm em comum
+        e o que é exclusivo de cada uma. Toque em qualquer organela para abrir a página dela.
+      </p>
+      <div class="comparar-legenda" aria-hidden="true">
+        <span><span class="bolinha animal"></span> Célula animal</span>
+        <span><span class="bolinha vegetal"></span> Célula vegetal</span>
+        <span><span class="bolinha ambas"></span> As duas</span>
+      </div>
+    </div>
+
+    <div id="comparar"><!-- montado por comparar.js --></div>
   </main>
 
   <footer class="rodape">
     <div class="conteiner">
-      <p><a href="index.html">← Voltar ao explorador</a></p>
+      <p><a href="index.html">← Voltar ao explorador</a> &nbsp;•&nbsp; <a href="quiz.html">Fazer o quiz</a></p>
     </div>
   </footer>
 
   <script src="data/organelas.js"></script>
   <script src="js/icones.js"></script>
-  <script src="js/progresso.js"></script>
   <script src="js/a11y.js"></script>
   <script src="js/comum.js"></script>
-  <script src="js/quiz.js"></script>
+  <script src="js/comparar.js"></script>
 </body>
 </html>

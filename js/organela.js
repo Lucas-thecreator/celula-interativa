@@ -28,6 +28,14 @@
 
   document.title = o.nome + ' • Célula Interativa';
 
+  // Marca esta organela como "explorada" (conta para as medalhas).
+  if (window.Progresso) window.Progresso.marcarVisitada(o.id);
+
+  function ui(nome) { return window.svgUI ? window.svgUI(nome) : ''; }
+  function iconeDaOrganela() {
+    return window.svgIconeOrganela ? window.svgIconeOrganela(o.id) : ('<span aria-hidden="true">' + (o.emoji || '') + '</span>');
+  }
+
   // Conjunto para navegar (animal/vegetal) ou todas, mantendo a ordem.
   var conjunto = (celula === 'animal' || celula === 'vegetal')
     ? window.organelasPorCelula(celula)
@@ -45,10 +53,13 @@
     '<a class="voltar" href="index.html">← Voltar para o explorador</a>' +
 
     '<div class="organela-topo">' +
-      '<h1>' + o.nome + '</h1>' +
-      '<p class="apelido-grande">Na escola, é ' + o.apelido + '.</p>' +
-      '<div class="organela-tags">' + tags + '</div>' +
+      '<span class="organela-icone" style="background:' + o.cor + '" aria-hidden="true">' + iconeDaOrganela() + '</span>' +
+      '<div class="titulos">' +
+        '<h1>' + o.nome + '</h1>' +
+        '<p class="apelido-grande">Na escola, é ' + o.apelido + '.</p>' +
+      '</div>' +
     '</div>' +
+    '<div class="organela-tags">' + tags + '</div>' +
 
     '<div class="painel">' +
       '<div class="visu">' +
@@ -58,7 +69,7 @@
     '</div>' +
 
     '<div class="player">' +
-      '<p class="player-titulo">🔊 Explicação em áudio</p>' +
+      '<p class="player-titulo">' + ui('som') + ' Explicação em áudio</p>' +
       '<div class="botoes">' +
         '<button class="btn-play" id="btn-ouvir">▶ Ouvir explicação</button>' +
         '<button class="btn-sec" id="btn-pausar">⏸ Pausar</button>' +
@@ -76,7 +87,7 @@
     '</div>' +
 
     '<div class="painel mini-quiz" id="mini-quiz" aria-labelledby="mini-quiz-titulo">' +
-      '<h2 id="mini-quiz-titulo">🧠 Teste rápido</h2>' +
+      '<h2 id="mini-quiz-titulo">' + ui('estrela') + ' Teste rápido</h2>' +
       '<p class="quiz-pergunta">' + o.quiz.pergunta + '</p>' +
       '<div class="quiz-opcoes" id="quiz-opcoes" role="group" aria-label="Escolha a resposta"></div>' +
       '<p class="quiz-feedback" id="quiz-feedback" role="status" aria-live="polite"></p>' +
@@ -95,12 +106,14 @@
   img.src = o.img;
   img.addEventListener('error', function () {
     var div = document.createElement('div');
-    div.className = 'placeholder-img visu-placeholder';
+    div.className = 'visu-placeholder org-capa';
+    div.style.setProperty('--cor', o.cor);
     div.setAttribute('role', 'img');
-    div.setAttribute('aria-label', 'Imagem de ' + o.nome + ' (foto ainda não adicionada)');
-    div.innerHTML = '<span class="ph-emoji" aria-hidden="true">' + o.emoji + '</span>' +
-                    '<span>' + o.nome + '</span>';
+    div.setAttribute('aria-label', 'Ilustração de ' + o.nome + ' (a foto do protótipo ainda será adicionada)');
+    div.innerHTML = iconeDaOrganela();
     img.replaceWith(div);
+    var legenda = document.querySelector('.visu-legenda');
+    if (legenda) legenda.textContent = 'Ilustração da organela. A foto do protótipo entra aqui em breve.';
   });
   ativarInclinacao(document.querySelector('.visu'));
 
@@ -143,6 +156,7 @@
         botao.classList.add('certa');
         feedback.className = 'quiz-feedback ok';
         feedback.textContent = '✅ Isso mesmo! Resposta certa.';
+        if (window.Progresso) window.Progresso.marcarQuizCerto(o.id);
       } else {
         botao.classList.add('errada');
         feedback.className = 'quiz-feedback nao';

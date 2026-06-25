@@ -19,6 +19,8 @@
   var indice = 0;
   var acertos = 0;
 
+  function ui(nome) { return window.svgUI ? window.svgUI(nome) : ''; }
+
   function recordeSalvo() {
     try { return JSON.parse(localStorage.getItem(CHAVE)) || {}; }
     catch (e) { return {}; }
@@ -30,7 +32,7 @@
   function telaInicial() {
     var r = recordeSalvo();
     var selo = r.selo
-      ? '<p class="quiz-selo-mini">🏅 Você já conquistou o selo de <strong>Cientista Celular</strong>!</p>'
+      ? '<p class="quiz-selo-mini">' + ui('medalha') + ' Você já conquistou o selo de <strong>Cientista Celular</strong>!</p>'
       : '';
     var recorde = (typeof r.melhor === 'number')
       ? '<p>Seu melhor resultado: <strong>' + r.melhor + ' de ' + total + '</strong>.</p>'
@@ -111,14 +113,14 @@
     salvarRecorde({ melhor: novoMelhor, selo: r.selo || ganhouTudo });
 
     var msg, emoji;
-    if (ganhouTudo) { emoji = '🏆'; msg = 'Perfeito! Você é oficialmente um(a) Cientista Celular!'; }
-    else if (acertos >= Math.ceil(total * 0.7)) { emoji = '🌟'; msg = 'Muito bem! Você já manda bem nas organelas.'; }
-    else if (acertos >= Math.ceil(total * 0.4)) { emoji = '👍'; msg = 'Bom começo! Revise as organelas e tente de novo.'; }
-    else { emoji = '🌱'; msg = 'Tudo bem! Dê mais uma olhada nas organelas e volte para o quiz.'; }
+    if (ganhouTudo) { emoji = ui('trofeu'); msg = 'Perfeito! Você é oficialmente um(a) Cientista Celular!'; }
+    else if (acertos >= Math.ceil(total * 0.7)) { emoji = ui('estrela'); msg = 'Muito bem! Você já manda bem nas organelas.'; }
+    else if (acertos >= Math.ceil(total * 0.4)) { emoji = ui('check'); msg = 'Bom começo! Revise as organelas e tente de novo.'; }
+    else { emoji = ui('foguete'); msg = 'Tudo bem! Dê mais uma olhada nas organelas e volte para o quiz.'; }
 
     var selo = ganhouTudo
       ? '<div class="selo" role="img" aria-label="Selo de Cientista Celular conquistado">' +
-          '<span class="selo-emoji" aria-hidden="true">🏅</span>' +
+          '<span class="selo-emoji" aria-hidden="true">' + ui('medalha') + '</span>' +
           '<strong>Cientista Celular</strong>' +
           '<small>Acertou todas as ' + total + ' perguntas</small>' +
         '</div>'
