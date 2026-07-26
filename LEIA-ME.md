@@ -74,6 +74,33 @@ uma **gravação própria**: coloque o MP3 em `audio/` e preencha o campo `audio
 > ⚠️ Celulares bloqueiam áudio automático. Por isso o áudio só toca quando o aluno aperta o
 > botão grande **“▶ Ouvir explicação”** — e nunca por cima do leitor de tela.
 
+### 🎤 Como conseguir uma voz melhor
+
+**Quem fornece a voz é o aparelho, não o site.** O site apenas pede "fale este texto" e usa a
+melhor voz que encontrar. Por isso a mesma página soa ótima num celular e robótica em outro.
+
+Em **⚙️ Mais opções → Voz** aparece a lista do aparelho. As marcadas com **⭐** têm
+`Natural`, `Neural` ou `Online` no nome: são as modernas e soam quase humanas. O botão
+**🎤 Testar voz** deixa ouvir antes de decidir, e a escolha fica salva.
+
+| Onde você abre o site | O que costuma aparecer | Qualidade |
+|---|---|---|
+| **Chrome no Windows** | Microsoft Daniel, Microsoft Maria | 😐 antigas, metálicas |
+| **Microsoft Edge** | ⭐ Francisca, Antonio, Thalita, Brenda *(Online Natural)* | 😍 a melhor de todas |
+| **Celular Android** | ⭐ vozes do Google em português | 😃 muito boa |
+| **iPhone / iPad** | ⭐ Luciana, Joana | 😃 muito boa |
+
+> 👉 **Dica para a sala de aula:** se no computador da escola só aparecerem "Daniel" e "Maria",
+> abra o site no **Microsoft Edge**. Ele já vem instalado no Windows e traz as vozes ⭐ de graça,
+> sem instalar nada. É o jeito mais rápido de melhorar o áudio.
+
+Se nem assim resolver, dá para **gravar a própria voz** (ou a de um aluno!) em MP3 e apontar
+no campo `audio` da organela — aí o site usa a gravação e ignora a voz do navegador.
+
+> 🔧 Detalhe técnico: o site fala em **pedaços de até 180 caracteres**, não de uma vez só.
+> Chrome e Edge cortam a fala por volta dos 15 segundos, principalmente nas vozes Online;
+> quebrando em frases, cada pedaço termina antes disso e o aluno ouve o texto inteiro.
+
 ## 🌐 4. Como PUBLICAR e ATUALIZAR
 
 Este projeto está publicado no **GitHub Pages**:
@@ -129,6 +156,8 @@ elas valem para as próximas visitas e para todas as páginas.
 - **🎬 Menos animação** — desliga transições e movimentos.
 - **🖱️ Realce do foco** — contorno laranja bem grosso no que está sob o mouse ou sob o cursor
   do teclado.
+- **Voz** — lista as vozes em português do aparelho, com ⭐ nas melhores, e um botão
+  **🎤 Testar voz**. Veja *"Como conseguir uma voz melhor"* na seção 3.
 - **Velocidade da voz** — 🐢 devagar, normal ou 🐇 rápida.
 - **▶️ Ler esta página** — lê o conteúdo principal em voz alta.
 - **🔇 Parar a leitura** e **↺ Restaurar o padrão**.

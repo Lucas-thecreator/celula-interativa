@@ -51,10 +51,13 @@
     raiz.classList.toggle('menos-anima', !!p.menosAnima);
     raiz.classList.toggle('realce', !!p.realce);
 
-    // Velocidade da voz (lida pelo tts.js a cada fala).
+    // Velocidade e voz (lidas pelo tts.js a cada fala).
     if (window.FalaConfig) {
       window.FalaConfig.velocidade = VELOCIDADES[p.velocidade || 'normal'] || VELOCIDADES.normal;
+      window.FalaConfig.voz = p.voz || '';
     }
+    var seletor = document.getElementById('sel-voz');
+    if (seletor) seletor.value = p.voz || '';
 
     // Leitura ao passar o mouse / focar pelo teclado.
     if (window.LeituraAoPassar) {
@@ -134,6 +137,14 @@
             '<button class="btn-a11y" id="btn-realce" aria-pressed="false">🖱️ Realce do foco</button>' +
           '</div>' +
 
+          '<div class="a11y-grupo">' +
+            '<label class="grupo-rotulo" for="sel-voz">Voz:</label>' +
+            '<select class="sel-a11y" id="sel-voz">' +
+              '<option value="">Automática (a melhor do aparelho)</option>' +
+            '</select>' +
+            '<button class="btn-a11y" id="btn-testar-voz">🎤 Testar voz</button>' +
+          '</div>' +
+
           '<div class="a11y-grupo" role="group" aria-label="Velocidade da voz">' +
             '<span class="grupo-rotulo">Velocidade da voz:</span>' +
             '<button class="btn-a11y" id="btn-vel-devagar" aria-pressed="false">🐢 Devagar</button>' +
@@ -151,6 +162,10 @@
           '<p class="a11y-dica">💡 Com <strong>Ler ao passar</strong> ligado, é só parar o mouse ' +
             '(ou ir com a tecla Tab) em cima de um botão que o site fala o que está escrito nele. ' +
             'Aperte <kbd>Esc</kbd> a qualquer momento para o áudio parar.</p>' +
+          '<p class="a11y-dica">🎤 Quem fornece a voz é o aparelho, não o site. As vozes com ' +
+            '<strong>⭐</strong> são as modernas e soam muito melhor. Se a lista só tiver ' +
+            '“Daniel” e “Maria”, abra o site no <strong>Microsoft Edge</strong> ou no celular ' +
+            'para ganhar vozes bem mais naturais.</p>' +
         '</div>' +
       '</div>';
 
@@ -230,6 +245,60 @@
         salvarPrefs(prefs); aplicarPrefs(prefs);
         avisar('Velocidade da voz: ' + b.textContent.replace(/[^\wÀ-ÿ ]/g, '').trim().toLowerCase() + '.', true);
       });
+    });
+
+    /* ---- Escolha da voz ----
+       A lista sai do próprio aparelho e chega de forma assíncrona, por isso
+       preenchemos por callback. Marcamos com ⭐ as vozes modernas
+       ("Natural"/"Neural"/"Online"), que soam bem melhor que as antigas. */
+    var seletorVoz = document.getElementById('sel-voz');
+
+    function preencherVozes() {
+      if (!window.Vozes) return;
+      var lista = window.Vozes.listar();
+      var escolhida = prefs.voz || '';
+
+      seletorVoz.innerHTML = '<option value="">Automática (a melhor do aparelho)</option>';
+      lista.forEach(function (v) {
+        var op = document.createElement('option');
+        op.value = v.name;
+        op.textContent = (/natural|neural|online/i.test(v.name) ? '⭐ ' : '') +
+                         v.name + ' (' + v.lang + ')';
+        seletorVoz.appendChild(op);
+      });
+      seletorVoz.value = escolhida;
+
+      if (!lista.length) {
+        seletorVoz.innerHTML = '<option value="">Nenhuma voz em português neste aparelho</option>';
+        seletorVoz.disabled = true;
+      } else {
+        seletorVoz.disabled = false;
+      }
+    }
+
+    if (window.Vozes) window.Vozes.aoCarregar(preencherVozes);
+    else preencherVozes();
+
+    seletorVoz.addEventListener('change', function () {
+      prefs.voz = seletorVoz.value;
+      salvarPrefs(prefs);
+      aplicarPrefs(prefs);
+      var nome = seletorVoz.options[seletorVoz.selectedIndex].textContent.replace('⭐ ', '');
+      avisar('Voz escolhida: ' + nome, false);
+      if (typeof window.falar === 'function') {
+        window.falar('Olá! Eu sou a Célu. Vou explicar as organelas para você.');
+      }
+    });
+
+    document.getElementById('btn-testar-voz').addEventListener('click', function () {
+      if (typeof window.falar !== 'function' || !window.AudioFala.suportaTTS) {
+        avisar('Seu navegador não tem leitura por voz.', false);
+        return;
+      }
+      var atual = window.Vozes && window.Vozes.escolhida();
+      avisar('Testando: ' + (atual ? atual.name : 'voz padrão') + '.', false);
+      window.falar('Olá! Eu sou a Célu. A mitocôndria é a cozinha da escola: ' +
+                   'é ela que produz a energia para tudo funcionar.');
     });
 
     /* ---- Áudio ---- */

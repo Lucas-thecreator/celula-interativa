@@ -139,6 +139,14 @@ a { color: var(--azul); }
 .a11y-dica {
   flex-basis: 100%; margin: 2px 0 0; font-size: 0.86rem; color: var(--cinza); line-height: 1.5;
 }
+/* Lista de vozes do aparelho. Mesma altura dos botões para o dedo acertar. */
+.sel-a11y {
+  border: 2px solid var(--azul); background: #fff; color: var(--azul-escuro);
+  font-family: inherit; font-weight: 700; font-size: 0.95rem;
+  border-radius: 999px; padding: 6px 12px; min-height: 40px; cursor: pointer;
+  max-width: min(340px, 100%);
+}
+.sel-a11y:disabled { border-color: #b9c6df; color: var(--cinza); cursor: not-allowed; }
 .a11y-dica kbd {
   background: #fff; border: 2px solid #c9d9f5; border-bottom-width: 3px;
   border-radius: 6px; padding: 0 6px; font-family: inherit; font-size: 0.82em; font-weight: 800;
@@ -192,6 +200,7 @@ html.menos-anima { scroll-behavior: auto !important; }
   #a11y-bar .conteiner, .a11y-painel .conteiner { gap: 6px 8px; }
   #a11y-bar .rotulo, .a11y-grupo .grupo-rotulo { font-size: 0.85rem; }
   .btn-a11y { padding: 6px 10px; font-size: 0.85rem; }
+  .sel-a11y { padding: 6px 10px; font-size: 0.85rem; max-width: 100%; }
 }
 
 /* ---------- Página inicial ---------- */
@@ -726,6 +735,7 @@ html.hc .a11y-painel { background: #000; border-bottom: 2px solid #ffec3d; }
 html.hc .a11y-grupo .grupo-rotulo, html.hc .a11y-aviso { color: #ffec3d; }
 html.hc .a11y-dica { color: #fff; }
 html.hc .a11y-dica kbd { background: #000; color: #ffec3d; border-color: #ffec3d; }
+html.hc .sel-a11y { background: #000; color: #ffec3d; border-color: #ffec3d; }
 html.hc .lendo-agora { outline-color: #ffec3d !important; }
 html.hc.realce a:hover, html.hc.realce button:hover, html.hc.realce [role="button"]:hover { outline-color: #fff; }
 html.hc .btn-play, html.hc .btn-grande, html.hc .btn-pill, html.hc .btn-gerar { background: #ffec3d; color: #000; box-shadow: none; }
@@ -778,6 +788,7 @@ html.escuro .a11y-grupo .grupo-rotulo { color: #9ec1ff; }
 html.escuro .a11y-aviso { color: #86e2a8; }
 html.escuro .a11y-dica { color: #aab8d6; }
 html.escuro .a11y-dica kbd { background: #16213a; color: #cfe0ff; border-color: #3b5180; }
+html.escuro .sel-a11y { background: #16213a; color: #cfe0ff; border-color: #3b5180; }
 html.escuro .card-organela p, html.escuro .visu-legenda, html.escuro .dica-diagrama,
 html.escuro .dica-qr, html.escuro .btn-nav small, html.escuro .jornada-sub,
 html.escuro .medalha-desc, html.escuro .grupo-sub, html.escuro .linha-org .org-info span { color: #aab8d6; }
