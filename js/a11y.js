@@ -1,25 +1,28 @@
 /* =========================================================================
    CONTROLES DE ACESSIBILIDADE  (a11y.js)
    -------------------------------------------------------------------------
-   Monta a barra fixa em qualquer página que tenha <div id="a11y-bar">.
+   Monta a barra em qualquer página que tenha <div id="a11y-bar">.
 
-   Sempre à vista:
-     A− / A+          -> diminui / aumenta o tamanho do texto
-     Ler ao passar    -> fala o que está escrito no botão sob o mouse/foco
-     Alto contraste   -> tema preto-e-amarelo
-     Modo escuro      -> tema escuro
-     Mais opções      -> abre o painel abaixo
+   A barra mostra UM ÚNICO botão — "♿ Acessibilidade" — que abre um painel
+   com todos os ajustes. Assim a página não fica com uma fileira enorme de
+   botões no topo, empurrando o conteúdo para baixo (o que atrapalhava
+   principalmente no celular).
 
-   No painel "Mais opções":
-     Fonte legível    -> troca por uma fonte sem curvas, boa para dislexia
-     Menos animação   -> desliga transições e movimentos
-     Realce do foco   -> contorno grosso no que está sob o mouse/foco
+   Dentro do painel:
+     Tamanho do texto -> A− / A+
+     Cores            -> alto contraste (preto e amarelo) e modo escuro
+     Ler em voz alta  -> ler ao passar o mouse, ler a página, parar
+     Voz              -> escolher entre as vozes do aparelho + testar
      Velocidade da voz-> devagar / normal / rápida
-     Ler esta página  -> lê o conteúdo principal em voz alta
-     Parar a leitura  -> silencia (o mesmo que apertar Esc)
+     Mais ajustes     -> fonte legível (dislexia), menos animação, realce
      Restaurar padrão -> volta tudo ao estado original
 
-   Tudo é salvo em localStorage e reaplicado nas próximas visitas.
+   O botão mostra um contador ("3 ativas") quando há ajustes ligados. Sem
+   ele, alguém que herdasse o computador com alto contraste ligado não teria
+   pista nenhuma de onde desligar, já que os controles ficam escondidos.
+
+   Tudo é salvo em localStorage — inclusive se o painel fica aberto ou
+   fechado — e reaplicado nas próximas visitas.
 
    Importante: estes controles COMPLEMENTAM o leitor de tela, não o
    substituem. Os botões têm rótulo de texto (nunca só ícone) e estado
@@ -75,11 +78,36 @@
     Object.keys(VELOCIDADES).forEach(function (v) {
       marcar('btn-vel-' + v, (p.velocidade || 'normal') === v);
     });
+
+    atualizarContador(p);
   }
 
   function marcar(id, ligado) {
     var b = document.getElementById(id);
     if (b) b.setAttribute('aria-pressed', ligado ? 'true' : 'false');
+  }
+
+  /* Quantos ajustes estão fora do padrão. Vira o "3 ativas" do botão. */
+  function contarAtivas(p) {
+    var n = 0;
+    if (p.contraste) n++;
+    if (p.escuro) n++;
+    if (p.lerPassar) n++;
+    if (p.fonteLegivel) n++;
+    if (p.menosAnima) n++;
+    if (p.realce) n++;
+    if (p.fonte && p.fonte !== 1) n++;
+    if (p.velocidade && p.velocidade !== 'normal') n++;
+    if (p.voz) n++;
+    return n;
+  }
+
+  function atualizarContador(p) {
+    var selo = document.getElementById('a11y-contador');
+    if (!selo) return;
+    var n = contarAtivas(p);
+    selo.textContent = n ? (n + (n === 1 ? ' ativa' : ' ativas')) : '';
+    selo.hidden = !n;
   }
 
   /* Avisa o que acabou de mudar: por escrito (para todos) e, se a leitura
@@ -116,25 +144,37 @@
     if (!bar) return;
 
     bar.innerHTML =
-      '<div class="conteiner" role="group" aria-label="Controles de acessibilidade">' +
-        '<span class="rotulo">♿ Acessibilidade:</span>' +
-        '<button class="btn-a11y" id="btn-fonte-menos" aria-label="Diminuir o tamanho do texto">A−</button>' +
-        '<button class="btn-a11y" id="btn-fonte-mais" aria-label="Aumentar o tamanho do texto">A+</button>' +
-        '<button class="btn-a11y" id="btn-ler-passar" aria-pressed="false" ' +
-          'data-falar="Ler ao passar o mouse. Toque para ligar ou desligar.">🔊 Ler ao passar</button>' +
-        '<button class="btn-a11y" id="btn-contraste" aria-pressed="false">Alto contraste</button>' +
-        '<button class="btn-a11y" id="btn-escuro" aria-pressed="false">Modo escuro</button>' +
-        '<button class="btn-a11y mais" id="btn-mais" aria-expanded="false" aria-controls="a11y-mais">⚙️ Mais opções</button>' +
+      '<div class="conteiner">' +
+        '<button class="btn-a11y abrir" id="btn-acessibilidade" aria-expanded="false" ' +
+          'aria-controls="a11y-painel" ' +
+          'data-falar="Acessibilidade. Abre os ajustes de texto, cores e voz.">' +
+          '♿ Acessibilidade' +
+          '<span class="contador" id="a11y-contador" hidden></span>' +
+        '</button>' +
         '<p class="a11y-aviso" id="a11y-aviso" role="status" aria-live="polite"></p>' +
       '</div>' +
 
-      '<div class="a11y-painel" id="a11y-mais" hidden>' +
-        '<div class="conteiner">' +
+      '<div class="a11y-painel" id="a11y-painel" hidden>' +
+        '<div class="conteiner" role="group" aria-label="Ajustes de acessibilidade">' +
+
           '<div class="a11y-grupo">' +
-            '<span class="grupo-rotulo" id="rot-leitura">Leitura:</span>' +
-            '<button class="btn-a11y" id="btn-fonte-legivel" aria-pressed="false">🔤 Fonte legível</button>' +
-            '<button class="btn-a11y" id="btn-menos-anima" aria-pressed="false">🎬 Menos animação</button>' +
-            '<button class="btn-a11y" id="btn-realce" aria-pressed="false">🖱️ Realce do foco</button>' +
+            '<span class="grupo-rotulo">Tamanho do texto:</span>' +
+            '<button class="btn-a11y" id="btn-fonte-menos" aria-label="Diminuir o tamanho do texto">A−</button>' +
+            '<button class="btn-a11y" id="btn-fonte-mais" aria-label="Aumentar o tamanho do texto">A+</button>' +
+          '</div>' +
+
+          '<div class="a11y-grupo">' +
+            '<span class="grupo-rotulo">Cores:</span>' +
+            '<button class="btn-a11y" id="btn-contraste" aria-pressed="false">Alto contraste</button>' +
+            '<button class="btn-a11y" id="btn-escuro" aria-pressed="false">🌙 Modo escuro</button>' +
+          '</div>' +
+
+          '<div class="a11y-grupo">' +
+            '<span class="grupo-rotulo">Ler em voz alta:</span>' +
+            '<button class="btn-a11y" id="btn-ler-passar" aria-pressed="false" ' +
+              'data-falar="Ler ao passar o mouse. Toque para ligar ou desligar.">🔊 Ler ao passar</button>' +
+            '<button class="btn-a11y" id="btn-ler-pagina">▶️ Ler esta página</button>' +
+            '<button class="btn-a11y" id="btn-parar-audio">🔇 Parar a leitura</button>' +
           '</div>' +
 
           '<div class="a11y-grupo">' +
@@ -153,10 +193,16 @@
           '</div>' +
 
           '<div class="a11y-grupo">' +
-            '<span class="grupo-rotulo">Áudio:</span>' +
-            '<button class="btn-a11y" id="btn-ler-pagina">▶️ Ler esta página</button>' +
-            '<button class="btn-a11y" id="btn-parar-audio">🔇 Parar a leitura</button>' +
+            '<span class="grupo-rotulo">Mais ajustes:</span>' +
+            '<button class="btn-a11y" id="btn-fonte-legivel" aria-pressed="false">🔤 Fonte legível</button>' +
+            '<button class="btn-a11y" id="btn-menos-anima" aria-pressed="false">🎬 Menos animação</button>' +
+            '<button class="btn-a11y" id="btn-realce" aria-pressed="false">🖱️ Realce do foco</button>' +
+          '</div>' +
+
+          '<div class="a11y-grupo">' +
+            '<span class="grupo-rotulo"></span>' +
             '<button class="btn-a11y" id="btn-restaurar">↺ Restaurar o padrão</button>' +
+            '<button class="btn-a11y" id="btn-fechar-a11y">✕ Fechar</button>' +
           '</div>' +
 
           '<p class="a11y-dica">💡 Com <strong>Ler ao passar</strong> ligado, é só parar o mouse ' +
@@ -178,6 +224,27 @@
       return prefs[campo];
     }
 
+    /* ---- Abrir/fechar o painel ----
+       Fica salvo: quem precisa dos ajustes costuma querer o painel à mão
+       nas outras páginas também. */
+    var btnAbrir = document.getElementById('btn-acessibilidade');
+    var painel = document.getElementById('a11y-painel');
+
+    function mostrarPainel(aberto) {
+      btnAbrir.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+      painel.hidden = !aberto;
+      prefs.painelAberto = aberto;
+      salvarPrefs(prefs);
+    }
+
+    btnAbrir.addEventListener('click', function () {
+      mostrarPainel(btnAbrir.getAttribute('aria-expanded') !== 'true');
+    });
+    document.getElementById('btn-fechar-a11y').addEventListener('click', function () {
+      mostrarPainel(false);
+      btnAbrir.focus();   // devolve o foco para quem navega por teclado
+    });
+
     /* ---- Tamanho do texto ---- */
     document.getElementById('btn-fonte-mais').addEventListener('click', function () {
       prefs.fonte = Math.min((prefs.fonte || 1) + PASSO, FONTE_MAX);
@@ -188,18 +255,6 @@
       prefs.fonte = Math.max((prefs.fonte || 1) - PASSO, FONTE_MIN);
       salvarPrefs(prefs); aplicarPrefs(prefs);
       avisar('Texto menor: ' + Math.round(prefs.fonte * 100) + '%.', prefs.lerPassar);
-    });
-
-    /* ---- Ler ao passar o mouse ----
-       O clique aqui é um gesto do usuário: é justamente ele que "libera" a
-       voz do navegador em celulares, por isso já falamos a confirmação. */
-    document.getElementById('btn-ler-passar').addEventListener('click', function () {
-      var ligado = alternar('lerPassar');
-      if (ligado) {
-        avisar('Leitura ao passar o mouse ligada. Pare o mouse em cima de um botão para ouvir.', true);
-      } else {
-        avisar('Leitura ao passar o mouse desligada.', false);
-      }
     });
 
     /* ---- Temas ---- */
@@ -214,15 +269,19 @@
       avisar('Modo escuro ' + (ligado ? 'ligado' : 'desligado') + '.', prefs.lerPassar);
     });
 
-    /* ---- Painel "Mais opções" ---- */
-    var btnMais = document.getElementById('btn-mais');
-    var painel = document.getElementById('a11y-mais');
-    btnMais.addEventListener('click', function () {
-      var aberto = btnMais.getAttribute('aria-expanded') === 'true';
-      btnMais.setAttribute('aria-expanded', aberto ? 'false' : 'true');
-      painel.hidden = aberto;
+    /* ---- Ler ao passar o mouse ----
+       O clique aqui é um gesto do usuário: é justamente ele que "libera" a
+       voz do navegador em celulares, por isso já falamos a confirmação. */
+    document.getElementById('btn-ler-passar').addEventListener('click', function () {
+      var ligado = alternar('lerPassar');
+      if (ligado) {
+        avisar('Leitura ao passar o mouse ligada. Pare o mouse em cima de um botão para ouvir.', true);
+      } else {
+        avisar('Leitura ao passar o mouse desligada.', false);
+      }
     });
 
+    /* ---- Mais ajustes ---- */
     document.getElementById('btn-fonte-legivel').addEventListener('click', function () {
       var ligado = alternar('fonteLegivel');
       avisar('Fonte legível ' + (ligado ? 'ligada' : 'desligada') + '.', prefs.lerPassar);
@@ -256,7 +315,12 @@
     function preencherVozes() {
       if (!window.Vozes) return;
       var lista = window.Vozes.listar();
-      var escolhida = prefs.voz || '';
+
+      if (!lista.length) {
+        seletorVoz.innerHTML = '<option value="">Nenhuma voz em português neste aparelho</option>';
+        seletorVoz.disabled = true;
+        return;
+      }
 
       seletorVoz.innerHTML = '<option value="">Automática (a melhor do aparelho)</option>';
       lista.forEach(function (v) {
@@ -266,14 +330,8 @@
                          v.name + ' (' + v.lang + ')';
         seletorVoz.appendChild(op);
       });
-      seletorVoz.value = escolhida;
-
-      if (!lista.length) {
-        seletorVoz.innerHTML = '<option value="">Nenhuma voz em português neste aparelho</option>';
-        seletorVoz.disabled = true;
-      } else {
-        seletorVoz.disabled = false;
-      }
+      seletorVoz.disabled = false;
+      seletorVoz.value = prefs.voz || '';
     }
 
     if (window.Vozes) window.Vozes.aoCarregar(preencherVozes);
@@ -320,7 +378,10 @@
     });
 
     document.getElementById('btn-restaurar').addEventListener('click', function () {
+      var estavaAberto = btnAbrir.getAttribute('aria-expanded') === 'true';
       Object.keys(prefs).forEach(function (k) { delete prefs[k]; });
+      // Fechar o painel na cara de quem acabou de clicar nele seria confuso.
+      prefs.painelAberto = estavaAberto;
       salvarPrefs(prefs);
       aplicarPrefs(prefs);
       if (typeof window.pararFala === 'function') window.pararFala();
@@ -328,6 +389,7 @@
     });
 
     aplicarPrefs(prefs);
+    mostrarPainel(!!prefs.painelAberto);
   }
 
   // Aplica as preferências o quanto antes para evitar "piscar" sem o tema.

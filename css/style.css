@@ -102,11 +102,12 @@ a { color: var(--azul); }
 
 /* ---------- Barra de acessibilidade ---------- */
 #a11y-bar { background: var(--branco); border-bottom: 2px solid #dbe6ff; }
-#a11y-bar .conteiner {
+/* O ">" importa: o painel também tem um .conteiner dentro de #a11y-bar, e
+   sem ele o align-items daqui centralizaria cada linha do painel. */
+#a11y-bar > .conteiner {
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   padding-top: 8px; padding-bottom: 8px;
 }
-#a11y-bar .rotulo { font-weight: 800; color: var(--azul-escuro); margin-right: 4px; }
 .btn-a11y {
   border: 2px solid var(--azul); background: #fff; color: var(--azul-escuro);
   font-weight: 800; border-radius: 999px; padding: 6px 14px; cursor: pointer;
@@ -116,7 +117,25 @@ a { color: var(--azul); }
 .btn-a11y:hover { background: var(--azul-claro); }
 .btn-a11y:active { transform: translateY(1px); }
 .btn-a11y[aria-pressed="true"] { background: var(--azul); color: #fff; }
-.btn-a11y[aria-expanded="true"] { background: var(--azul-escuro); color: #fff; }
+
+/* O único botão que fica à vista na barra. Precisa ser achado de longe por
+   quem tem baixa visão, então vem preenchido e um pouco maior. */
+.btn-a11y.abrir {
+  background: var(--azul); color: #fff; border-color: var(--azul);
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px;
+}
+.btn-a11y.abrir:hover { background: var(--azul-escuro); border-color: var(--azul-escuro); }
+.btn-a11y.abrir[aria-expanded="true"] { background: var(--azul-escuro); border-color: var(--azul-escuro); }
+
+/* "3 ativas" — sem isso, quem pega o computador com alto contraste já ligado
+   não teria pista de onde desligar, já que os controles ficam escondidos. */
+/* Laranja ESCURO de propósito: branco sobre o laranja normal dá só 2,8:1 e
+   reprova no mínimo de 4,5:1 — feio justamente num recurso de acessibilidade. */
+.btn-a11y.abrir .contador {
+  background: var(--laranja-escuro); color: #fff; font-size: 0.78rem; font-weight: 800;
+  border-radius: 999px; padding: 2px 9px; white-space: nowrap;
+}
+.btn-a11y.abrir .contador[hidden] { display: none; }
 
 /* Aviso do que acabou de mudar ("Alto contraste ligado"). Fica no fim da
    barra e some sozinho; quem usa leitor de tela ouve pelo aria-live. */
@@ -126,18 +145,21 @@ a { color: var(--azul); }
 }
 .a11y-aviso:empty { display: none; }
 
-/* Painel "Mais opções" */
+/* Painel de acessibilidade: um grupo por linha, com os rótulos alinhados
+   à esquerda. Em coluna fica bem mais fácil de varrer com os olhos (e com
+   uma lupa de tela) do que tudo embolado numa fileira só. */
 .a11y-painel { background: #f3f8ff; border-bottom: 2px solid #dbe6ff; }
 .a11y-painel .conteiner {
-  display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center;
-  padding-top: 12px; padding-bottom: 12px;
+  display: flex; flex-direction: column; gap: 10px;
+  padding-top: 14px; padding-bottom: 16px;
 }
 .a11y-grupo { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .a11y-grupo .grupo-rotulo {
   font-weight: 800; color: var(--azul-escuro); font-size: 0.9rem;
+  min-width: 9.5rem;
 }
 .a11y-dica {
-  flex-basis: 100%; margin: 2px 0 0; font-size: 0.86rem; color: var(--cinza); line-height: 1.5;
+  margin: 2px 0 0; font-size: 0.86rem; color: var(--cinza); line-height: 1.5;
 }
 /* Lista de vozes do aparelho. Mesma altura dos botões para o dedo acertar. */
 .sel-a11y {
@@ -197,10 +219,13 @@ html.menos-anima { scroll-behavior: auto !important; }
 /* No celular a barra tem muitos botões: encolhe o texto (nunca a altura, que
    precisa continuar confortável para o dedo) para caber em menos linhas. */
 @media (max-width: 560px) {
-  #a11y-bar .conteiner, .a11y-painel .conteiner { gap: 6px 8px; }
-  #a11y-bar .rotulo, .a11y-grupo .grupo-rotulo { font-size: 0.85rem; }
+  #a11y-bar > .conteiner { gap: 6px 8px; }
+  .a11y-painel .conteiner { gap: 12px; }
   .btn-a11y { padding: 6px 10px; font-size: 0.85rem; }
   .sel-a11y { padding: 6px 10px; font-size: 0.85rem; max-width: 100%; }
+  /* Sem espaço para rótulo e botões lado a lado: o rótulo vira o título da linha. */
+  .a11y-grupo .grupo-rotulo { min-width: 0; flex-basis: 100%; font-size: 0.85rem; }
+  .a11y-grupo .grupo-rotulo:empty { display: none; }
 }
 
 /* ---------- Página inicial ---------- */
@@ -727,10 +752,11 @@ html.hc .btn-nav, html.hc .balao, html.hc .cta-tutorial {
 html.hc .balao { color: #ffec3d; }
 html.hc .balao::before { display: none; }
 html.hc a, html.hc .voltar { color: #ffec3d; }
-html.hc #a11y-bar .rotulo { color: #ffec3d; }
-html.hc .btn-a11y { background: #000; color: #ffec3d; border-color: #ffec3d; }
+html.hc .btn-a11y, html.hc .btn-a11y.abrir { background: #000; color: #ffec3d; border-color: #ffec3d; }
 html.hc .btn-a11y[aria-pressed="true"],
-html.hc .btn-a11y[aria-expanded="true"] { background: #ffec3d; color: #000; }
+html.hc .btn-a11y.abrir[aria-expanded="true"] { background: #ffec3d; color: #000; }
+html.hc .btn-a11y.abrir .contador { background: #ffec3d; color: #000; }
+html.hc .btn-a11y.abrir[aria-expanded="true"] .contador { background: #000; color: #ffec3d; }
 html.hc .a11y-painel { background: #000; border-bottom: 2px solid #ffec3d; }
 html.hc .a11y-grupo .grupo-rotulo, html.hc .a11y-aviso { color: #ffec3d; }
 html.hc .a11y-dica { color: #fff; }
@@ -781,8 +807,8 @@ html.escuro .medalha.conquistada { background: #1c2a14; border-color: #3f6b1f; }
 html.escuro .balao { background: #20283d; border-color: #3a4566; color: #ffd9a6; }
 html.escuro .balao::before { border-right-color: #20283d; filter: none; }
 html.escuro #a11y-bar { background: #0f1830; border-bottom-color: #2a3a5e; }
-html.escuro #a11y-bar .rotulo { color: #9ec1ff; }
 html.escuro .btn-a11y { background: #16213a; color: #cfe0ff; border-color: #3b5180; }
+html.escuro .btn-a11y.abrir { background: var(--azul); color: #fff; border-color: var(--azul); }
 html.escuro .a11y-painel { background: #0c1428; border-bottom-color: #2a3a5e; }
 html.escuro .a11y-grupo .grupo-rotulo { color: #9ec1ff; }
 html.escuro .a11y-aviso { color: #86e2a8; }

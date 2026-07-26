@@ -15,6 +15,11 @@ http.createServer((req, res) => {
   if (!file.startsWith(ROOT) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) {
     res.writeHead(404); res.end('404'); return;
   }
-  res.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream' });
+  // Sem cache: é só pré-visualização. Sem isto o navegador guarda o css/js
+  // antigo e você jura que a alteração "não funcionou".
+  res.writeHead(200, {
+    'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream',
+    'Cache-Control': 'no-store, must-revalidate'
+  });
   fs.createReadStream(file).pipe(res);
 }).listen(PORT, () => console.log('Servindo em http://localhost:' + PORT));

@@ -138,29 +138,34 @@ pasta inteira. Ele gera um endereço na hora (crie uma conta grátis para mantê
 
 ## ♿ Acessibilidade já incluída
 
-A barra no topo de todas as páginas guarda as escolhas do aluno no próprio aparelho, então
-elas valem para as próximas visitas e para todas as páginas.
+No topo de todas as páginas há **um único botão: ♿ Acessibilidade**. Ele abre um painel com
+todos os ajustes. As escolhas ficam salvas no próprio aparelho, então valem para as próximas
+visitas e para todas as páginas — inclusive se o painel fica aberto ou fechado.
 
-**Sempre à vista:**
+Quando há ajustes ligados, o botão mostra um contador (**“3 ativas”**). Sem ele, quem pegasse
+o computador com alto contraste já ligado não teria pista de onde desligar, já que os
+controles ficam escondidos.
 
-- **A− / A+** — diminui e aumenta o tamanho do texto.
-- **🔊 Ler ao passar** — o site **fala o que está escrito** no botão ou link em que o aluno
-  parar o mouse, ou que receber o foco pela tecla **Tab**. Serve para quem tem baixa visão,
-  dislexia ou ainda está aprendendo a ler, sem precisar instalar leitor de tela.
-- **Alto contraste** (preto e amarelo) e **Modo escuro**.
+**Dentro do painel:**
 
-**Dentro de "⚙️ Mais opções":**
-
-- **🔤 Fonte legível** — troca as fontes decorativas por uma fonte sem curvas e com mais
-  espaço entre letras e linhas (recomendação comum para dislexia).
-- **🎬 Menos animação** — desliga transições e movimentos.
-- **🖱️ Realce do foco** — contorno laranja bem grosso no que está sob o mouse ou sob o cursor
-  do teclado.
+- **Tamanho do texto** — A− / A+.
+- **Cores** — alto contraste (preto e amarelo) e modo escuro.
+- **Ler em voz alta**
+  - **🔊 Ler ao passar** — o site **fala o que está escrito** no botão ou link em que o aluno
+    parar o mouse, ou que receber o foco pela tecla **Tab**. Serve para quem tem baixa visão,
+    dislexia ou ainda está aprendendo a ler, sem precisar instalar leitor de tela.
+  - **▶️ Ler esta página** — lê o conteúdo principal em voz alta.
+  - **🔇 Parar a leitura**.
 - **Voz** — lista as vozes em português do aparelho, com ⭐ nas melhores, e um botão
   **🎤 Testar voz**. Veja *"Como conseguir uma voz melhor"* na seção 3.
 - **Velocidade da voz** — 🐢 devagar, normal ou 🐇 rápida.
-- **▶️ Ler esta página** — lê o conteúdo principal em voz alta.
-- **🔇 Parar a leitura** e **↺ Restaurar o padrão**.
+- **Mais ajustes**
+  - **🔤 Fonte legível** — troca as fontes decorativas por uma fonte sem curvas e com mais
+    espaço entre letras e linhas (recomendação comum para dislexia).
+  - **🎬 Menos animação** — desliga transições e movimentos.
+  - **🖱️ Realce do foco** — contorno laranja bem grosso no que está sob o mouse ou sob o
+    cursor do teclado.
+- **↺ Restaurar o padrão** e **✕ Fechar**.
 
 **Detalhes que importam:**
 
