@@ -500,19 +500,23 @@ html.hc .destaque, html.hc .curiosidade { background: #000; border-left-color: #
 .btn-nav:hover, .btn-nav:focus-visible { border-color: var(--laranja); transform: translateY(-2px); }
 
 /* ---------- Tutorial ---------- */
+/* Cartão de cada passo. NÃO usar flex aqui: a numeração fica por conta de
+   ".passos > li.passo::before", e um display:flex jogava o título e o texto
+   lado a lado, espremendo o h3 numa coluna estreita. */
 .passo {
   background: var(--branco); border-radius: var(--raio); box-shadow: var(--sombra-suave);
-  padding: 20px 22px; margin-bottom: 18px; display: flex; gap: 18px; align-items: flex-start;
-}
-.passo .num {
-  flex: 0 0 auto; width: 46px; height: 46px; border-radius: 50%; background: var(--laranja);
-  color: #fff; font-family: var(--fonte-titulo); font-weight: 600;
-  display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+  padding: 20px 22px; margin-bottom: 18px;
 }
 .passo h3 { margin: 0 0 6px; }
-.passo .foto-passo { width: 100%; max-width: 360px; height: 200px; border-radius: 12px; object-fit: cover; margin-top: 10px; }
+/* Altura automática, sem recorte: nas fotos da montagem o que importa está
+   nas bordas (a moldura da parede, as peças espalhadas) e um corte fixo
+   comia justamente isso. */
+.passo .foto-passo {
+  display: block; width: 100%; max-width: 420px; height: auto;
+  border-radius: 12px; margin-top: 12px; background: var(--azul-claro);
+}
 .lista-materiais { columns: 2; gap: 24px; }
-@media (max-width: 560px) { .lista-materiais { columns: 1; } .passo { flex-direction: column; } }
+@media (max-width: 560px) { .lista-materiais { columns: 1; } }
 
 /* ---------- Rodapé ---------- */
 .rodape { background: var(--azul-escuro); color: #cdddff; padding: 24px 0; margin-top: 40px; font-size: 0.9rem; }

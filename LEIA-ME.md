@@ -76,6 +76,26 @@ Coloque as fotos na pasta `img/` com **exatamente estes nomes** (`.jpg`):
 > **Licença (importante para vender):** use só fotos próprias (ex.: do seu protótipo montado)
 > ou imagens de domínio público/CC0. Evite imagens aleatórias do Google.
 
+### 📸 Fotos do passo a passo (tutorial.html)
+
+O tutorial mostra uma foto por etapa. Salve em `img/` com **exatamente estes nomes**:
+
+| # | Passo | Nome do arquivo |
+|---|---|---|
+| 1 | A base de isopor | `tutorial-1-base-isopor.jpg` |
+| 2 | Forre a base com TNT branco | `tutorial-2-tnt-branco.jpg` |
+| 3 | A parede celular | `tutorial-3-parede-celular.jpg` |
+| 4 | O citoplasma | `tutorial-4-citoplasma.jpg` |
+| 5 | Os contornos das organelas | `tutorial-5-contornos.jpg` |
+| 6 | As organelas em EVA | `tutorial-6-organelas.jpg` |
+| 7 | Velcro atrás de cada peça | `tutorial-7-velcro.jpg` |
+| 8 | Célula vegetal pronta | `tutorial-8-vegetal.jpg` |
+| 9 | Célula animal pronta | `tutorial-9-animal.jpg` |
+
+> Cada foto **some sozinha** enquanto o arquivo não existir, em vez de mostrar aquele ícone de
+> imagem quebrada. Dá para enviar as fotos aos poucos, sem o tutorial ficar feio no meio do
+> caminho.
+
 ## 🔊 3. Áudio: voz do navegador (padrão) ou gravação
 
 Por padrão o site usa a **voz do navegador** (lê o campo `analogia` em português). Para usar

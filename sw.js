@@ -11,7 +11,7 @@
    para garantir a limpeza do cache antigo nos aparelhos.
    ========================================================================= */
 
-var CACHE = 'celula-interativa-v6';
+var CACHE = 'celula-interativa-v7';
 
 var CORE = [
   'index.html',
@@ -54,7 +54,18 @@ var FOTOS = [
   'img/centriolos.jpg',
   'img/vacuolo.jpg',
   'img/cloroplasto.jpg',
-  'img/parede-celular.jpg'
+  'img/parede-celular.jpg',
+
+  // Passo a passo da montagem (tutorial.html)
+  'img/tutorial-1-base-isopor.jpg',
+  'img/tutorial-2-tnt-branco.jpg',
+  'img/tutorial-3-parede-celular.jpg',
+  'img/tutorial-4-citoplasma.jpg',
+  'img/tutorial-5-contornos.jpg',
+  'img/tutorial-6-organelas.jpg',
+  'img/tutorial-7-velcro.jpg',
+  'img/tutorial-8-vegetal.jpg',
+  'img/tutorial-9-animal.jpg'
 ];
 
 self.addEventListener('install', function (e) {
