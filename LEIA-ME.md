@@ -91,10 +91,13 @@ O tutorial mostra uma foto por etapa. Salve em `img/` com **exatamente estes nom
 | 7 | Velcro atrás de cada peça | `tutorial-7-velcro.jpg` |
 | 8 | Célula vegetal pronta | `tutorial-8-vegetal.jpg` |
 | 9 | Célula animal pronta | `tutorial-9-animal.jpg` |
+| — | Foto grande no topo da página | `tutorial-resultado.jpg` |
 
+> ✅ **As fotos do tutorial já estão na pasta `img/`.**
+>
 > Cada foto **some sozinha** enquanto o arquivo não existir, em vez de mostrar aquele ícone de
-> imagem quebrada. Dá para enviar as fotos aos poucos, sem o tutorial ficar feio no meio do
-> caminho.
+> imagem quebrada. Dá para trocar ou enviar fotos aos poucos, sem o tutorial ficar feio no
+> meio do caminho.
 
 ## 🔊 3. Áudio: voz do navegador (padrão) ou gravação
 

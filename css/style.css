@@ -508,6 +508,13 @@ html.hc .destaque, html.hc .curiosidade { background: #000; border-left-color: #
   padding: 20px 22px; margin-bottom: 18px;
 }
 .passo h3 { margin: 0 0 6px; }
+
+/* Foto do resultado, no topo do tutorial: mostra logo a meta de quem vai montar. */
+.foto-resultado {
+  display: block; width: 100%; max-width: 340px; height: auto;
+  border-radius: var(--raio-sm); margin: 16px auto 8px; box-shadow: var(--sombra-suave);
+}
+.legenda-resultado { text-align: center; color: var(--cinza); font-size: 0.9rem; margin: 0; }
 /* Altura automática, sem recorte: nas fotos da montagem o que importa está
    nas bordas (a moldura da parede, as peças espalhadas) e um corte fixo
    comia justamente isso. */

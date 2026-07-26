@@ -11,7 +11,7 @@
    para garantir a limpeza do cache antigo nos aparelhos.
    ========================================================================= */
 
-var CACHE = 'celula-interativa-v7';
+var CACHE = 'celula-interativa-v8';
 
 var CORE = [
   'index.html',
@@ -65,7 +65,8 @@ var FOTOS = [
   'img/tutorial-6-organelas.jpg',
   'img/tutorial-7-velcro.jpg',
   'img/tutorial-8-vegetal.jpg',
-  'img/tutorial-9-animal.jpg'
+  'img/tutorial-9-animal.jpg',
+  'img/tutorial-resultado.jpg'
 ];
 
 self.addEventListener('install', function (e) {
