@@ -116,6 +116,83 @@ a { color: var(--azul); }
 .btn-a11y:hover { background: var(--azul-claro); }
 .btn-a11y:active { transform: translateY(1px); }
 .btn-a11y[aria-pressed="true"] { background: var(--azul); color: #fff; }
+.btn-a11y[aria-expanded="true"] { background: var(--azul-escuro); color: #fff; }
+
+/* Aviso do que acabou de mudar ("Alto contraste ligado"). Fica no fim da
+   barra e some sozinho; quem usa leitor de tela ouve pelo aria-live. */
+.a11y-aviso {
+  margin: 0; flex-basis: 100%; font-size: 0.85rem; font-weight: 700;
+  color: var(--verde-escuro);
+}
+.a11y-aviso:empty { display: none; }
+
+/* Painel "Mais opções" */
+.a11y-painel { background: #f3f8ff; border-bottom: 2px solid #dbe6ff; }
+.a11y-painel .conteiner {
+  display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center;
+  padding-top: 12px; padding-bottom: 12px;
+}
+.a11y-grupo { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.a11y-grupo .grupo-rotulo {
+  font-weight: 800; color: var(--azul-escuro); font-size: 0.9rem;
+}
+.a11y-dica {
+  flex-basis: 100%; margin: 2px 0 0; font-size: 0.86rem; color: var(--cinza); line-height: 1.5;
+}
+.a11y-dica kbd {
+  background: #fff; border: 2px solid #c9d9f5; border-bottom-width: 3px;
+  border-radius: 6px; padding: 0 6px; font-family: inherit; font-size: 0.82em; font-weight: 800;
+}
+
+/* ---------- Elemento que está sendo lido em voz alta ---------- */
+.lendo-agora {
+  outline: 4px dashed var(--laranja) !important;
+  outline-offset: 3px !important;
+  border-radius: 8px;
+}
+
+/* ---------- Realce do foco (opção "🖱️ Realce do foco") ----------
+   Deixa MUITO óbvio o que está sob o mouse ou sob o cursor do teclado —
+   ajuda quem tem baixa visão a não se perder na página. */
+html.realce a:hover, html.realce button:hover, html.realce summary:hover,
+html.realce [role="button"]:hover, html.realce input:hover,
+html.realce select:hover, html.realce textarea:hover {
+  outline: 4px solid var(--laranja);
+  outline-offset: 2px;
+}
+html.realce :focus-visible {
+  outline: 6px solid var(--laranja) !important;
+  outline-offset: 3px !important;
+}
+
+/* ---------- Fonte legível (opção "🔤 Fonte legível") ----------
+   Troca as fontes decorativas por uma sem letras "espelhadas" e com mais
+   espaço entre letras e linhas — recomendação comum para dislexia. */
+html.fonte-legivel body, html.fonte-legivel h1, html.fonte-legivel h2,
+html.fonte-legivel h3, html.fonte-legivel .titulo, html.fonte-legivel button,
+html.fonte-legivel input, html.fonte-legivel select, html.fonte-legivel textarea,
+html.fonte-legivel .logo {
+  font-family: Verdana, Tahoma, 'Trebuchet MS', 'DejaVu Sans', sans-serif !important;
+  letter-spacing: 0.03em;
+  word-spacing: 0.12em;
+}
+html.fonte-legivel body, html.fonte-legivel p, html.fonte-legivel li { line-height: 1.85; }
+
+/* ---------- Menos animação (opção "🎬 Menos animação") ---------- */
+html.menos-anima *, html.menos-anima *::before, html.menos-anima *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+html.menos-anima { scroll-behavior: auto !important; }
+
+/* No celular a barra tem muitos botões: encolhe o texto (nunca a altura, que
+   precisa continuar confortável para o dedo) para caber em menos linhas. */
+@media (max-width: 560px) {
+  #a11y-bar .conteiner, .a11y-painel .conteiner { gap: 6px 8px; }
+  #a11y-bar .rotulo, .a11y-grupo .grupo-rotulo { font-size: 0.85rem; }
+  .btn-a11y { padding: 6px 10px; font-size: 0.85rem; }
+}
 
 /* ---------- Página inicial ---------- */
 main { padding: 26px 0 60px; }
@@ -620,7 +697,7 @@ html.hc .destaque, html.hc .curiosidade { background: #000; border-left-color: #
 .erro { background: #fff3cd; border: 2px solid #f0c000; padding: 14px; border-radius: 12px; margin-top: 16px; color: #5b4a00; }
 
 @media print {
-  .topo, #a11y-bar, .rodape, .nao-imprimir, .skip-link { display: none !important; }
+  .topo, #a11y-bar, .a11y-painel, .rodape, .nao-imprimir, .skip-link { display: none !important; }
   body { background: #fff; }
   .cartao-qr { border: 1px dashed #999; }
 }
@@ -643,7 +720,14 @@ html.hc .balao::before { display: none; }
 html.hc a, html.hc .voltar { color: #ffec3d; }
 html.hc #a11y-bar .rotulo { color: #ffec3d; }
 html.hc .btn-a11y { background: #000; color: #ffec3d; border-color: #ffec3d; }
-html.hc .btn-a11y[aria-pressed="true"] { background: #ffec3d; color: #000; }
+html.hc .btn-a11y[aria-pressed="true"],
+html.hc .btn-a11y[aria-expanded="true"] { background: #ffec3d; color: #000; }
+html.hc .a11y-painel { background: #000; border-bottom: 2px solid #ffec3d; }
+html.hc .a11y-grupo .grupo-rotulo, html.hc .a11y-aviso { color: #ffec3d; }
+html.hc .a11y-dica { color: #fff; }
+html.hc .a11y-dica kbd { background: #000; color: #ffec3d; border-color: #ffec3d; }
+html.hc .lendo-agora { outline-color: #ffec3d !important; }
+html.hc.realce a:hover, html.hc.realce button:hover, html.hc.realce [role="button"]:hover { outline-color: #fff; }
 html.hc .btn-play, html.hc .btn-grande, html.hc .btn-pill, html.hc .btn-gerar { background: #ffec3d; color: #000; box-shadow: none; }
 html.hc .btn-sec, html.hc .btn-sec-claro, html.hc .btn-pill.contorno { border-color: #ffec3d; color: #ffec3d; background: #000; }
 html.hc .pill, html.hc .tag, html.hc .num, html.hc .marca, html.hc .selo-explorado { background: #ffec3d; color: #000; }
@@ -689,6 +773,11 @@ html.escuro .balao::before { border-right-color: #20283d; filter: none; }
 html.escuro #a11y-bar { background: #0f1830; border-bottom-color: #2a3a5e; }
 html.escuro #a11y-bar .rotulo { color: #9ec1ff; }
 html.escuro .btn-a11y { background: #16213a; color: #cfe0ff; border-color: #3b5180; }
+html.escuro .a11y-painel { background: #0c1428; border-bottom-color: #2a3a5e; }
+html.escuro .a11y-grupo .grupo-rotulo { color: #9ec1ff; }
+html.escuro .a11y-aviso { color: #86e2a8; }
+html.escuro .a11y-dica { color: #aab8d6; }
+html.escuro .a11y-dica kbd { background: #16213a; color: #cfe0ff; border-color: #3b5180; }
 html.escuro .card-organela p, html.escuro .visu-legenda, html.escuro .dica-diagrama,
 html.escuro .dica-qr, html.escuro .btn-nav small, html.escuro .jornada-sub,
 html.escuro .medalha-desc, html.escuro .grupo-sub, html.escuro .linha-org .org-info span { color: #aab8d6; }

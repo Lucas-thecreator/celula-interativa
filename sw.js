@@ -11,7 +11,7 @@
    para garantir a limpeza do cache antigo nos aparelhos.
    ========================================================================= */
 
-var CACHE = 'celula-interativa-v3';
+var CACHE = 'celula-interativa-v4';
 
 var CORE = [
   'index.html',
@@ -29,6 +29,7 @@ var CORE = [
   'js/a11y.js',
   'js/comum.js',
   'js/tts.js',
+  'js/ler-ao-passar.js',
   'js/main.js',
   'js/organela.js',
   'js/quiz.js',

@@ -17,7 +17,8 @@ sobre.html          → objetivo do projeto e acessibilidade
 data/organelas.js   → ⭐ TODO O CONTEÚDO (textos, analogias e quizzes) fica aqui
 css/style.css       → cores, fontes, acessibilidade, alto contraste e modo escuro
 js/tts.js           → camada de áudio (voz do navegador hoje; MP3 amanhã)
-js/a11y.js          → barra de acessibilidade (A+/A−, alto contraste, modo escuro)
+js/ler-ao-passar.js → fala o que está escrito no botão sob o mouse ou sob o foco
+js/a11y.js          → barra de acessibilidade (fonte, contraste, escuro, voz…)
 js/main.js          → explorador (home)
 js/organela.js      → página da organela
 js/quiz.js          → quiz final
@@ -110,10 +111,42 @@ pasta inteira. Ele gera um endereço na hora (crie uma conta grátis para mantê
 
 ## ♿ Acessibilidade já incluída
 
-- Botões de **aumentar/diminuir fonte**, **alto contraste** e **modo escuro** (com memória).
+A barra no topo de todas as páginas guarda as escolhas do aluno no próprio aparelho, então
+elas valem para as próximas visitas e para todas as páginas.
+
+**Sempre à vista:**
+
+- **A− / A+** — diminui e aumenta o tamanho do texto.
+- **🔊 Ler ao passar** — o site **fala o que está escrito** no botão ou link em que o aluno
+  parar o mouse, ou que receber o foco pela tecla **Tab**. Serve para quem tem baixa visão,
+  dislexia ou ainda está aprendendo a ler, sem precisar instalar leitor de tela.
+- **Alto contraste** (preto e amarelo) e **Modo escuro**.
+
+**Dentro de "⚙️ Mais opções":**
+
+- **🔤 Fonte legível** — troca as fontes decorativas por uma fonte sem curvas e com mais
+  espaço entre letras e linhas (recomendação comum para dislexia).
+- **🎬 Menos animação** — desliga transições e movimentos.
+- **🖱️ Realce do foco** — contorno laranja bem grosso no que está sob o mouse ou sob o cursor
+  do teclado.
+- **Velocidade da voz** — 🐢 devagar, normal ou 🐇 rápida.
+- **▶️ Ler esta página** — lê o conteúdo principal em voz alta.
+- **🔇 Parar a leitura** e **↺ Restaurar o padrão**.
+
+**Detalhes que importam:**
+
+- A leitura por voz **nasce desligada** — áudio que começa sozinho atrapalha mais do que ajuda.
+- A tecla **Esc** silencia o áudio a qualquer momento, em qualquer página.
+- No **celular** a leitura por passagem não dispara: lá o dedo que "passa" é o mesmo que
+  clica, e falar no toque bagunçaria a navegação.
+- A leitura por passagem **nunca fala por cima** da explicação da organela.
+- Emojis e setinhas são removidos antes de falar (senão a voz tenta pronunciá-los).
 - Compatível com **leitor de tela** (TalkBack/VoiceOver) — textos, títulos em ordem e imagens descritas.
 - **Diagrama** com pontos clicáveis **e** lista de texto como alternativa.
 - Navegação por **teclado** com foco bem visível; nada depende só de cor.
+
+> Quer que um botão seja lido com outras palavras? Coloque `data-falar="o que a voz deve
+> dizer"` nele no HTML — isso vale mais que o texto que está na tela.
 
 ## 💰 Pronto para monetizar depois
 

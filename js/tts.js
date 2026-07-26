@@ -22,6 +22,11 @@
 (function () {
   var suportaTTS = ('speechSynthesis' in window);
 
+  /* Velocidade da voz — a barra de acessibilidade escreve aqui.
+     0.75 = devagar (bom para quem está aprendendo a ler)
+     0.95 = normal   1.25 = rápida (para quem já conhece o texto) */
+  window.FalaConfig = window.FalaConfig || { velocidade: 0.95 };
+
   // O carregamento das vozes às vezes é assíncrono — pedimos cedo.
   if (suportaTTS) {
     window.speechSynthesis.getVoices();
@@ -41,7 +46,7 @@
   function novaFala(texto) {
     var u = new SpeechSynthesisUtterance(texto);
     u.lang = 'pt-BR';
-    u.rate = 0.95;   // um tiquinho mais devagar, melhor para crianças
+    u.rate = window.FalaConfig.velocidade || 0.95;  // ajustável na barra de acessibilidade
     u.pitch = 1;
     var voz = escolherVozPtBr();
     if (voz) u.voice = voz;
@@ -69,6 +74,16 @@
     var elAudio = null;        // <audio> quando for MP3
     var texto = '';            // texto a falar quando for TTS
     var aoMudarEstado = function () {};
+    var tocandoAgora = false;
+
+    /* Centraliza o aviso de estado para sabermos, a qualquer momento, se a
+       explicação está no ar. A leitura por hover consulta isso para não
+       falar por cima da narração da organela. */
+    function notificar(estado) {
+      tocandoAgora = (estado === 'tocando');
+      aoMudarEstado(estado);
+    }
+    function estaTocando() { return tocandoAgora; }
 
     function configurar(organela, callbackEstado) {
       parar();
@@ -76,9 +91,9 @@
       if (organela.audio) {
         modo = 'mp3';
         elAudio = new Audio(organela.audio);
-        elAudio.addEventListener('play',  function () { aoMudarEstado('tocando'); });
-        elAudio.addEventListener('pause', function () { aoMudarEstado('pausado'); });
-        elAudio.addEventListener('ended', function () { aoMudarEstado('fim'); });
+        elAudio.addEventListener('play',  function () { notificar('tocando'); });
+        elAudio.addEventListener('pause', function () { notificar('pausado'); });
+        elAudio.addEventListener('ended', function () { notificar('fim'); });
       } else {
         modo = 'tts';
         // O brief pede que o áudio leia a ANALOGIA da organela.
@@ -88,13 +103,13 @@
 
     function tocar() {
       if (modo === 'mp3') return elAudio.play(); // Promise (pode ser bloqueada)
-      if (!suportaTTS) { aoMudarEstado('sem-suporte'); return Promise.reject(); }
+      if (!suportaTTS) { notificar('sem-suporte'); return Promise.reject(); }
       window.speechSynthesis.cancel();
       var u = novaFala(texto);
-      u.onstart  = function () { aoMudarEstado('tocando'); };
-      u.onpause  = function () { aoMudarEstado('pausado'); };
-      u.onresume = function () { aoMudarEstado('tocando'); };
-      u.onend    = function () { aoMudarEstado('fim'); };
+      u.onstart  = function () { notificar('tocando'); };
+      u.onpause  = function () { notificar('pausado'); };
+      u.onresume = function () { notificar('tocando'); };
+      u.onend    = function () { notificar('fim'); };
       window.speechSynthesis.speak(u);
       return Promise.resolve();
     }
@@ -109,6 +124,7 @@
     }
     function reiniciar() { parar(); return tocar(); }
     function parar() {
+      tocandoAgora = false;
       if (modo === 'mp3' && elAudio) { elAudio.pause(); elAudio.currentTime = 0; }
       else if (suportaTTS) { window.speechSynthesis.cancel(); }
     }
@@ -116,7 +132,7 @@
     return {
       configurar: configurar, tocar: tocar, pausar: pausar,
       retomar: retomar, reiniciar: reiniciar, parar: parar,
-      suportaTTS: suportaTTS
+      estaTocando: estaTocando, suportaTTS: suportaTTS
     };
   })();
 

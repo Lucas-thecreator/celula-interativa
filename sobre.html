@@ -14,6 +14,9 @@
       if (_p.fonte) _d.style.setProperty('--font-scale', _p.fonte);
       if (_p.contraste) _d.classList.add('hc');
       if (_p.escuro) _d.classList.add('escuro');
+      if (_p.fonteLegivel) _d.classList.add('fonte-legivel');
+      if (_p.menosAnima) _d.classList.add('menos-anima');
+      if (_p.realce) _d.classList.add('realce');
     } catch (e) {}
   </script>
   <link rel="manifest" href="manifest.webmanifest">
@@ -101,6 +104,8 @@
   </footer>
 
   <script src="data/organelas.js"></script>
+  <script src="js/tts.js"></script>
+  <script src="js/ler-ao-passar.js"></script>
   <script src="js/a11y.js"></script>
   <script src="js/comum.js"></script>
 </body>
