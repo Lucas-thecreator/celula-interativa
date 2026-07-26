@@ -59,8 +59,19 @@ Coloque as fotos na pasta `img/` com **exatamente estes nomes** (`.jpg`):
 | Cloroplasto | `cloroplasto.jpg` |
 | Parede celular | `parede-celular.jpg` |
 
-> Enquanto a foto não existir, o site mostra um quadrinho com o emoji e o nome da organela —
-> então ele já funciona sem as fotos.
+> ✅ **As 11 fotos do protótipo já estão na pasta `img/`.** Esta tabela serve para quando você
+> quiser trocar alguma por uma foto melhor: é só salvar por cima, com o mesmo nome.
+>
+> Cuidado com dois nomes que não batem com o rótulo comum: a peça que você chama de
+> **"parede vegetal"** é o arquivo **`parede-celular.jpg`**, e **ribossomos** e **cloroplastos**
+> ficam no **singular** (`ribossomo.jpg`, `cloroplasto.jpg`).
+>
+> Enquanto uma foto não existir, o site mostra um quadrinho com o ícone e o nome da organela —
+> então ele nunca fica quebrado.
+>
+> As fotos são exibidas **inteiras** (`contain`), não cortadas. Isso é de propósito: peças como
+> a membrana e a parede celular são *contornos* com o miolo vazio, e um recorte quadrado comia
+> justamente a borda, deixando o cartão em branco.
 >
 > **Licença (importante para vender):** use só fotos próprias (ex.: do seu protótipo montado)
 > ou imagens de domínio público/CC0. Evite imagens aleatórias do Google.

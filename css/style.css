@@ -369,6 +369,17 @@ main { padding: 26px 0 60px; }
   width: 100%; height: 132px; border-radius: var(--raio-sm); object-fit: cover;
   background: var(--azul-claro); margin-bottom: 12px; display: block;
 }
+/* Foto do protótipo no cartão: "contain", nunca "cover". Várias peças são
+   CONTORNOS (membrana plasmática, parede celular) com o miolo vazio — com
+   cover o recorte comia justamente a borda e sobrava um quadrado branco,
+   impossível de reconhecer. O fundo é um tom bem claro da cor da organela,
+   para a sobra do enquadramento parecer proposital. */
+.card-organela .mini-img.tem-foto {
+  background-color: color-mix(in srgb, var(--cor) 12%, #fff);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 .card-organela h3 { margin: 0 0 4px; font-size: 1.12rem; color: var(--azul-escuro); }
 .card-organela p { margin: 0; color: var(--cinza); font-size: 0.95rem; }
 

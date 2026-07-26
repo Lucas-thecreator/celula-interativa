@@ -11,7 +11,7 @@
    para garantir a limpeza do cache antigo nos aparelhos.
    ========================================================================= */
 
-var CACHE = 'celula-interativa-v5';
+var CACHE = 'celula-interativa-v6';
 
 var CORE = [
   'index.html',
@@ -39,10 +39,32 @@ var CORE = [
   'assets/icon.svg'
 ];
 
+/* As fotos do protótipo. Ficam separadas do CORE de propósito: o cache.addAll
+   é "tudo ou nada", então uma única foto faltando quebraria a instalação
+   inteira do modo offline — e em silêncio. Aqui cada uma é guardada por
+   conta própria; quem faltar simplesmente não fica disponível offline. */
+var FOTOS = [
+  'img/membrana-plasmatica.jpg',
+  'img/nucleo.jpg',
+  'img/mitocondria.jpg',
+  'img/citoplasma.jpg',
+  'img/ribossomo.jpg',
+  'img/reticulo-endoplasmatico.jpg',
+  'img/complexo-de-golgi.jpg',
+  'img/centriolos.jpg',
+  'img/vacuolo.jpg',
+  'img/cloroplasto.jpg',
+  'img/parede-celular.jpg'
+];
+
 self.addEventListener('install', function (e) {
   e.waitUntil(
     caches.open(CACHE).then(function (cache) {
-      return cache.addAll(CORE);
+      return cache.addAll(CORE).then(function () {
+        return Promise.all(FOTOS.map(function (u) {
+          return cache.add(u).catch(function () { /* foto ainda não enviada */ });
+        }));
+      });
     }).then(function () { return self.skipWaiting(); })
   );
 });

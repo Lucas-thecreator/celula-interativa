@@ -81,10 +81,9 @@
       var img = new Image();
       img.onload = function () {
         fig.classList.remove('org-capa');
+        fig.classList.add('tem-foto');
         fig.innerHTML = '';
         fig.style.backgroundImage = 'url("' + o.img + '")';
-        fig.style.backgroundSize = 'cover';
-        fig.style.backgroundPosition = 'center';
       };
       img.src = o.img;
       a.appendChild(fig);
