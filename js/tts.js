@@ -26,8 +26,8 @@
 
    Acessibilidade: o áudio é SEMPRE disparado por um toque/clique do usuário,
    nunca sozinho. Quem usa leitor de tela já tem a página lida pelo próprio
-   leitor; o botão de áudio é um complemento (baixa visão, dislexia, quem
-   gosta de ouvir) e não atrapalha o leitor de tela.
+   leitor; o botão de áudio é um complemento para quem gosta de ouvir e não
+   atrapalha o leitor de tela.
    ========================================================================= */
 
 (function () {

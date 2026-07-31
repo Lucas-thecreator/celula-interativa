@@ -3,13 +3,13 @@
    -------------------------------------------------------------------------
    Quando o recurso está LIGADO, o site fala em voz alta o que está escrito
    no botão/link em que o usuário parou o mouse — ou que recebeu o foco pelo
-   teclado (Tab). Isso ajuda quem tem baixa visão, dislexia, dificuldade de
-   leitura ou está aprendendo a ler, sem precisar instalar leitor de tela.
+   teclado (Tab). Ajuda quem ainda está aprendendo a ler ou prefere ouvir,
+   sem precisar instalar leitor de tela.
 
    Decisões de acessibilidade importantes:
    - NASCE DESLIGADO. Áudio que começa sozinho atrapalha mais do que ajuda.
    - Vale para o MOUSE e para o TECLADO. Se só respondesse ao mouse, quem
-     navega por Tab (muita gente com deficiência visual) ficaria de fora.
+     navega por Tab, sem usar mouse, ficaria de fora.
    - Espera um instante (ATRASO) antes de falar. Sem isso, arrastar o mouse
      pela tela dispararia dezenas de falas em sequência.
    - No TOQUE (celular/tablet) não dispara: lá o dedo que "passa" é o mesmo
