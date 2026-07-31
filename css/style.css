@@ -118,8 +118,8 @@ a { color: var(--azul); }
 .btn-a11y:active { transform: translateY(1px); }
 .btn-a11y[aria-pressed="true"] { background: var(--azul); color: #fff; }
 
-/* O único botão que fica à vista na barra. Precisa ser achado de longe por
-   quem tem baixa visão, então vem preenchido e um pouco maior. */
+/* O único botão que fica à vista na barra. Precisa ser achado de longe,
+   então vem preenchido e um pouco maior. */
 .btn-a11y.abrir {
   background: var(--azul); color: #fff; border-color: var(--azul);
   display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px;
@@ -182,8 +182,8 @@ a { color: var(--azul); }
 }
 
 /* ---------- Realce do foco (opção "🖱️ Realce do foco") ----------
-   Deixa MUITO óbvio o que está sob o mouse ou sob o cursor do teclado —
-   ajuda quem tem baixa visão a não se perder na página. */
+   Deixa MUITO óbvio o que está sob o mouse ou sob o cursor do teclado,
+   para não se perder na página. */
 html.realce a:hover, html.realce button:hover, html.realce summary:hover,
 html.realce [role="button"]:hover, html.realce input:hover,
 html.realce select:hover, html.realce textarea:hover {
@@ -542,59 +542,13 @@ html.hc .destaque, html.hc .curiosidade { background: #000; border-left-color: #
 .menu a[aria-current="page"] { background: var(--laranja); color: #fff; }
 
 /* =========================================================================
-   HOME: subtítulos, dica e diagrama
+   HOME: subtítulos e dicas
    ========================================================================= */
 .subtitulo { font-size: 1.4rem; margin: 26px 0 10px; }
-.dica-diagrama, .dica-qr { color: var(--cinza); font-size: 0.95rem; }
+.dica-home, .dica-qr { color: var(--cinza); font-size: 0.95rem; }
 .cta-tutorial {
   margin-top: 34px; font-size: 1.08rem; background: #fff; border: 2px dashed #c9d8ff;
   border-radius: var(--raio); padding: 16px 20px;
-}
-
-.diagrama {
-  position: relative; width: 100%; max-width: 660px; margin: 6px auto 12px; aspect-ratio: 4 / 3;
-}
-.celula-forma {
-  position: absolute; inset: 0; border: 6px solid var(--azul);
-  border-radius: 50% 50% 48% 52% / 52% 50% 50% 48%;
-  background: radial-gradient(circle at 50% 42%, #f3f8ff 0%, #dee9ff 72%, #cddffb 100%);
-  display: flex; align-items: flex-end; justify-content: center;
-}
-.diagrama.vegetal .celula-forma {
-  border: 7px solid var(--verde-escuro); border-radius: 26px;
-  background: linear-gradient(160deg, #ecfdf3 0%, #cdeed8 100%);
-  box-shadow: inset 0 0 0 10px rgba(22, 163, 74, 0.16);
-}
-.rotulo-forma {
-  margin-bottom: 8px; font-size: 0.74rem; font-weight: 800; color: var(--azul-escuro);
-  background: rgba(255, 255, 255, 0.82); padding: 2px 10px; border-radius: 999px;
-}
-.diagrama.vegetal .rotulo-forma { color: #14532d; }
-
-.hotspot {
-  position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column;
-  align-items: center; gap: 4px; text-decoration: none; z-index: 2;
-}
-.ponto {
-  width: 50px; height: 50px; border-radius: 50%; background: #fff; border: 3px solid var(--cor, #2563EB);
-  display: flex; align-items: center; justify-content: center; box-shadow: var(--sombra-suave);
-  transition: transform 0.12s ease; color: var(--cor, #2563EB);
-}
-.ponto .ico { width: 30px; height: 30px; }
-.ponto-rotulo {
-  background: rgba(255, 255, 255, 0.95); color: var(--azul-escuro); font-weight: 800;
-  font-size: 0.72rem; line-height: 1.2; padding: 2px 8px; border-radius: 999px; white-space: nowrap;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14); max-width: 32vw; overflow: hidden; text-overflow: ellipsis;
-}
-.hotspot:hover .ponto, .hotspot:focus-visible .ponto { transform: scale(1.14); }
-.hotspot:focus-visible { outline: none; }
-.hotspot:focus-visible .ponto { outline: 4px solid var(--laranja); outline-offset: 3px; }
-.hotspot.visitado .ponto { box-shadow: 0 0 0 3px #dcfce7, var(--sombra-suave); }
-
-@media (max-width: 560px) {
-  .ponto-rotulo { display: none; }
-  .ponto { width: 44px; height: 44px; }
-  .ponto .ico { width: 26px; height: 26px; }
 }
 
 /* =========================================================================
@@ -791,9 +745,9 @@ html.hc .btn-sec, html.hc .btn-sec-claro, html.hc .btn-pill.contorno { border-co
 html.hc .pill, html.hc .tag, html.hc .num, html.hc .marca, html.hc .selo-explorado { background: #ffec3d; color: #000; }
 html.hc .topo { background: #000; border-bottom: 2px solid #ffec3d; }
 html.hc .menu a[aria-current="page"], html.hc .card-celula[aria-pressed="true"] { outline-color: #ffec3d; }
-html.hc .organela-icone, html.hc .org-capa, html.hc .ponto, html.hc .medalha-disco,
+html.hc .organela-icone, html.hc .org-capa, html.hc .medalha-disco,
 html.hc .org-mini, html.hc .placar-card { background: #000 !important; color: #ffec3d !important; border: 2px solid #ffec3d; }
-html.hc .org-capa .ico, html.hc .ponto .ico, html.hc .organela-icone .ico,
+html.hc .org-capa .ico, html.hc .organela-icone .ico,
 html.hc .visu-placeholder .ico, html.hc .jornada h2 .ico { color: #ffec3d !important; }
 html.hc .medalha.bloqueada .medalha-disco { background: #000 !important; }
 html.hc .medalha.bloqueada .medalha-disco .ico { opacity: 1; }
@@ -837,7 +791,7 @@ html.escuro .a11y-aviso { color: #86e2a8; }
 html.escuro .a11y-dica { color: #aab8d6; }
 html.escuro .a11y-dica kbd { background: #16213a; color: #cfe0ff; border-color: #3b5180; }
 html.escuro .sel-a11y { background: #16213a; color: #cfe0ff; border-color: #3b5180; }
-html.escuro .card-organela p, html.escuro .visu-legenda, html.escuro .dica-diagrama,
+html.escuro .card-organela p, html.escuro .visu-legenda, html.escuro .dica-home,
 html.escuro .dica-qr, html.escuro .btn-nav small, html.escuro .jornada-sub,
 html.escuro .medalha-desc, html.escuro .grupo-sub, html.escuro .linha-org .org-info span { color: #aab8d6; }
 html.escuro .quiz-opcao { background: #16213a; color: #e6eeff; border-color: #3b5180; }
@@ -845,9 +799,6 @@ html.escuro .quiz-opcao.certa { background: #14532d; color: #d9ffe6; border-colo
 html.escuro .quiz-opcao.errada { background: #4c1d1d; color: #ffd9d9; border-color: #ef4444; }
 html.escuro .placeholder-img { background: #1c2842; color: #9ec1ff; }
 html.escuro a { color: #9ec1ff; }
-html.escuro .celula-forma { background: #16213a; }
-html.escuro .ponto { background: #0f1830; }
-html.escuro .ponto-rotulo { background: rgba(20,30,55,0.95); color: #cfe0ff; }
 html.escuro .jornada-barra, html.escuro .quiz-barra { background: #25324f; border-color: #3a4566; }
 html.escuro .pill { background: #25324f; color: #cfe0ff; }
 html.escuro .destaque { background: #2a2113; color: #ffcf99; }

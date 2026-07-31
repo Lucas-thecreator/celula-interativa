@@ -3,14 +3,11 @@
    -------------------------------------------------------------------------
    - Mostra o mascote "Célu" e o painel "Sua jornada" (progresso + medalhas).
    - Alterna entre Célula Animal e Célula Vegetal.
-   - Mostra um DIAGRAMA com as organelas como pontos clicáveis (mapa de pontos).
-   - Mostra também uma LISTA de texto, que é a alternativa acessível e
-     funciona muito bem com leitor de tela e para quem prefere lista.
+   - Monta os cartões das organelas, cada um com foto, nome e resumo.
    Tudo é montado a partir de data/organelas.js.
    ========================================================================= */
 
 (function () {
-  var diagrama = document.getElementById('diagrama');
   var lista = document.getElementById('lista-organelas');
   var titulo = document.getElementById('titulo-secao');
   var botoes = document.querySelectorAll('.card-celula');
@@ -31,29 +28,6 @@
   function iconeOrg(o, classe) {
     if (window.svgIconeOrganela) return window.svgIconeOrganela(o.id, { cls: classe });
     return '<span aria-hidden="true">' + (o.emoji || '•') + '</span>';
-  }
-
-  function montarDiagrama(tipo, organelas) {
-    if (!diagrama) return;
-    diagrama.className = 'diagrama ' + tipo;
-    diagrama.innerHTML =
-      '<div class="celula-forma" aria-hidden="true">' +
-        (tipo === 'vegetal' ? '<span class="rotulo-forma">Parede e membrana</span>' : '<span class="rotulo-forma">Membrana</span>') +
-      '</div>';
-
-    organelas.forEach(function (o) {
-      var visitado = window.Progresso && window.Progresso.visitou(o.id);
-      var a = document.createElement('a');
-      a.className = 'hotspot' + (visitado ? ' visitado' : '');
-      a.href = 'organela.html?id=' + o.id + '&celula=' + tipo;
-      a.style.left = o.mapa.x + '%';
-      a.style.top = o.mapa.y + '%';
-      a.setAttribute('aria-label', o.nome + ': ' + o.apelido + (visitado ? ' (já explorada)' : ''));
-      a.innerHTML =
-        '<span class="ponto" style="--cor:' + o.cor + '">' + iconeOrg(o) + '</span>' +
-        '<span class="ponto-rotulo">' + o.nome + '</span>';
-      diagrama.appendChild(a);
-    });
   }
 
   function montarLista(tipo, organelas) {
@@ -155,7 +129,6 @@
         '<h2>Organelas da ' + nomeCelula(tipo) + '</h2>' +
         '<span class="tag">' + organelas.length + ' organelas</span>';
     }
-    montarDiagrama(tipo, organelas);
     montarLista(tipo, organelas);
     try { localStorage.setItem(CHAVE, tipo); } catch (e) {}
   }

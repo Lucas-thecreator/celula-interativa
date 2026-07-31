@@ -11,7 +11,7 @@
    para garantir a limpeza do cache antigo nos aparelhos.
    ========================================================================= */
 
-var CACHE = 'celula-interativa-v8';
+var CACHE = 'celula-interativa-v9';
 
 var CORE = [
   'index.html',
